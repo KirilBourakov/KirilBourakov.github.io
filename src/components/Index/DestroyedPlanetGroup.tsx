@@ -1,4 +1,4 @@
-import {DestroyedPlanet} from "./models/DestroyedPlanet.tsx";
+import {DestroyedPlanet} from "../models/DestroyedPlanet.tsx";
 import {DoubleSide} from "three";
 import {Box} from "@react-three/flex";
 

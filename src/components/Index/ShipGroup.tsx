@@ -1,4 +1,4 @@
-import Ship from "./models/Ship.tsx";
+import Ship from "../models/Ship.tsx";
 
 export default function ShipGroup() {
     return (
