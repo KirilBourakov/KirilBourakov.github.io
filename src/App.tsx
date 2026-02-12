@@ -1,6 +1,6 @@
 import {Canvas, useThree} from '@react-three/fiber'
 import {Bloom, EffectComposer} from "@react-three/postprocessing";
-import MainLayout from "./components/Index/MainLayout.tsx";
+import MainLayout from "./components/index/MainLayout.tsx";
 
 
 export default function App() {
