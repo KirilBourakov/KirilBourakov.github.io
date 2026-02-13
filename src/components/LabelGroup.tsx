@@ -17,7 +17,7 @@ export function LabelGroup({hover, setHover, handleClick, linePoints, htmlPos, t
             <Line
                 points={linePoints}
                 color="black"
-                opacity={.3}
+                opacity={0.5}
             />
             <Html position={htmlPos}>
                 <div

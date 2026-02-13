@@ -34,7 +34,12 @@ export default function SunGroup(){
                         onClick={() => handleClick()}
                     />
 
-                    <HoverRing hover={hover} />
+                    <HoverRing
+                        hover={hover}
+                        innerRadius={0.7}
+                        outerRadius={0.8}
+                        position={new Vector3(0,0,0)}
+                    />
                 </group>
 
                 <LabelGroup
