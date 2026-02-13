@@ -25,7 +25,7 @@ export default function MainLayout() {
                     <SunGroup />
                 </Box>
 
-                <Box>
+                <Box centerAnchor>
                     <ShipGroup />
                 </Box>
 
