@@ -9,9 +9,12 @@ interface labelProps {
     linePoints: Vector3[]
     htmlPos: Vector3
     text: string
+    align?: "left" | "right"
 }
 
-export function LabelGroup({hover, setHover, handleClick, linePoints, htmlPos, text}: labelProps) {
+export function LabelGroup({hover, setHover, handleClick, linePoints, htmlPos, text, align = "right"}: labelProps) {
+    const alignClass = align === "left" ? "-translate-x-full origin-right" : "origin-left";
+    
     return (
         <>
             <Line
@@ -24,7 +27,7 @@ export function LabelGroup({hover, setHover, handleClick, linePoints, htmlPos, t
                     onMouseEnter={() => setHover(true)}
                     onMouseLeave={() => setHover(false)}
                     onClick={() => handleClick()}
-                    className={`${hover ? "scale-125" : ""} p-2 rounded-lg whitespace-nowrap bg-black/30 text-white select-none`}
+                    className={`${hover ? "scale-125" : ""} ${alignClass} transition-all duration-300 p-2 rounded-lg whitespace-nowrap bg-black/30 text-white select-none`}
                 >
                     {text}
                 </div>

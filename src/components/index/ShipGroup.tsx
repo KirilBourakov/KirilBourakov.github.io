@@ -39,10 +39,11 @@ export default function ShipGroup() {
                 handleClick={handleClick}
                 linePoints={[
                     new Vector3(0, -.5, 0),
-                    new Vector3(0, -4.4, 0),
-                    new Vector3(-0.5, -4.4, 0)
+                    new Vector3(0, -4.6, 0),
+                    new Vector3(-0.5, -4.6, 0)
                 ]}
-                htmlPos={new Vector3(-3, -4, 0)}
+                htmlPos={new Vector3(-0.5, -4.2, 0)}
+                align="left"
                 text={"[ PROJECTS ]"}
             />
         </group>
