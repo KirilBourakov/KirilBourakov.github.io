@@ -1,4 +1,4 @@
-import {animated, useTransition} from "@react-spring/three";
+import {animated, type SpringValue, useTransition} from "@react-spring/three";
 import {useRef} from "react";
 import {DoubleSide, Group} from "three";
 import {useFrame} from "@react-three/fiber";
@@ -16,10 +16,10 @@ export function HoverRing({hover}: { hover: boolean }) {
     )
 }
 
-function SpinningRing({styles}: { styles: any }) {
+function SpinningRing({styles}: { styles: { scale: SpringValue<number>; opacity: SpringValue<number>; }}) {
     const ringRef = useRef<Group>(null!)
 
-    useFrame((state, delta) => {
+    useFrame((_state, delta) => {
         ringRef.current.rotation.z += delta
     })
 

@@ -1,5 +1,5 @@
 import {useFrame} from "@react-three/fiber";
-import {type Mesh} from "three";
+import {type Mesh, Vector3} from "three";
 import {useRef, useState} from "react";
 import Sun from "../models/Sun.tsx";
 import {useCursor} from "@react-three/drei";
@@ -37,7 +37,18 @@ export default function SunGroup(){
                     <HoverRing hover={hover} />
                 </group>
 
-                <LabelGroup hover={hover} setHover={setHover} handleClick={handleClick} />
+                <LabelGroup
+                    hover={hover}
+                    setHover={setHover}
+                    handleClick={handleClick}
+                    linePoints={[
+                        new Vector3(0, 0, 0),
+                        new Vector3(0, -1.2, 0),
+                        new Vector3(0.5, -1.2, 0)
+                    ]}
+                    htmlPos={new Vector3(0.5, -1, 0)}
+                    text={"[ RESUME ]"}
+                />
             </group>
         </>
     )
