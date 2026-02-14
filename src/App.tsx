@@ -5,7 +5,7 @@ import MainLayout from "./components/index/MainLayout.tsx";
 
 export default function App() {
     return (
-        <div style={{ height: '100vh', width: '100vw', margin: '0px' }}>
+        <div className="w-screen h-screen m-0 relative">
             <Canvas dpr={[1, 1]}>
                 <EffectComposer autoClear={false} multisampling={0}>
                     <Bloom luminanceThreshold={1} intensity={2} selectable />
@@ -15,6 +15,10 @@ export default function App() {
 
                 <ambientLight intensity={2} />
             </Canvas>
+
+            <div className="absolute right-0 top-0 w-screen h-screen lg:w-2/3 bg-white/50">
+                Projects Here
+            </div>
         </div>
     )
 }
