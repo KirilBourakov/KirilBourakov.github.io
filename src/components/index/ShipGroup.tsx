@@ -1,6 +1,6 @@
 import Ship from "../models/Ship.tsx";
 import {HoverRing} from "../HoverRing.tsx";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useBounds, useCursor} from "@react-three/drei";
 import {Mesh, Vector3} from "three";
 import {LabelGroup} from "../LabelGroup.tsx";
@@ -14,10 +14,8 @@ export default function ShipGroup() {
     const { camera, size } = useThree()
     useCursor(hover)
 
-    function zoom() {
-        if (meshRef.current) {
-            api.refresh(meshRef.current).fit()
-
+    useEffect(() => {
+        if (zoomed && meshRef.current) {
             const viewWidth = size.width
             const viewHeight = size.height
             const xOffset = viewWidth * 0.333
@@ -30,7 +28,12 @@ export default function ShipGroup() {
                 viewWidth,
                 viewHeight
             )
+            api.refresh(meshRef.current).fit()
+        }
+    }, [size, zoomed, camera, api]);
 
+    function zoom() {
+        if (meshRef.current) {
             setZoomed(true)
         }
     }
@@ -39,11 +42,11 @@ export default function ShipGroup() {
         <group position={[0, 2, -10]}  >
             <group ref={meshRef}>
                 <Ship
-                    scale={hover ? .95 : .9}
+                    scale={hover && !zoomed ? .95 : .9}
                     rotation={[Math.PI, .4, 0]}
                     onPointerOver={() => setHover(true)}
                     onPointerOut={() => setHover(false)}
-                    onClick={() => zoom()}
+                    onClick={zoom}
                 />
 
                 {!zoomed &&
