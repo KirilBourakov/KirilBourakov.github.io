@@ -25,16 +25,12 @@ export default function ShipGroup({ cameraRef }: {cameraRef: RefObject<CameraCon
                     meshRef.current,
                     true,
                     {
-                        paddingLeft: 0,
+                        paddingLeft: -2,
                         paddingRight: 0,
                         paddingTop: 0,
                         paddingBottom: 0
                     }
                 );
-            } else {
-                cameraRef.current.reset(true).then(
-                    () => setZoomFocus(ZoomType.NONE)
-                )
             }
         }
     }

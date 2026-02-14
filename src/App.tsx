@@ -45,7 +45,7 @@ export default function App() {
                     </Canvas>
                 </div>
 
-                <Overlays/>
+                <Overlays cameraRef={cameraRef} />
             </div>
         </ZoomContextProvider>
     )

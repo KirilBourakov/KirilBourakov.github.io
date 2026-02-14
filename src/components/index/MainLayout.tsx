@@ -1,5 +1,4 @@
 import {useThree} from "@react-three/fiber";
-import {Box, Flex} from "@react-three/flex";
 import DestroyedPlanetGroup from "./DestroyedPlanetGroup.tsx";
 import SunGroup from "./SunGroup.tsx";
 import ShipGroup from "./ShipGroup.tsx";
@@ -9,34 +8,25 @@ import {type RefObject} from "react";
 export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraControls>}) {
     const { viewport } = useThree()
 
+    const left = -viewport.width / 2 + 3
+    const right = viewport.width / 2 - 6
+    const top = viewport.height / 2 - 1.5
+    const bottom = -viewport.height / 2 + 1.5
+    const planetBottom = -viewport.height / 2 + 3
+
     return (
-        <Flex
-            flexDirection="row"
-            justifyContent="space-between"
-            alignItems="flex-start"
-            paddingTop={1.5}
-            paddingRight={3}
-            paddingBottom={1.5}
-            paddingLeft={3}
-            width={viewport.width}
-            height={viewport.height}
-            position={[-viewport.width / 2, viewport.height / 2, 0]}
-        >
-            <Box flexDirection="column" height={viewport.height} justifyContent="space-between" >
-                <Box>
-                    <SunGroup />
-                </Box>
+        <group>
+            <group position={[left, top, 0]}>
+                <SunGroup />
+            </group>
 
-                <Box centerAnchor>
-                    <ShipGroup cameraRef={cameraRef}/>
-                </Box>
+            <group position={[left, bottom, 0]}>
+                <ShipGroup cameraRef={cameraRef}/>
+            </group>
 
-            </Box>
-
-            <Box  alignSelf="flex-end" flexDirection="column">
+            <group position={[right, planetBottom, 0]}>
                 <DestroyedPlanetGroup />
-            </Box>
-
-        </Flex>
+            </group>
+        </group>
     )
 }

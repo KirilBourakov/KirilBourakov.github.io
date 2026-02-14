@@ -1,6 +1,5 @@
 import {DestroyedPlanet} from "../models/DestroyedPlanet.tsx";
 import {DoubleSide} from "three";
-import {Box} from "@react-three/flex";
 
 export default function DestroyedPlanetGroup(){
     const ringData = [
@@ -10,7 +9,7 @@ export default function DestroyedPlanetGroup(){
     ]
 
     return (
-        <Box centerAnchor scale={2} rotation={[-Math.PI / 2, -0.523599, 0]}>
+        <group scale={2.5} rotation={[-Math.PI / 2, -0.523599, 0]}>
             <DestroyedPlanet  />
 
             <group>
@@ -28,6 +27,6 @@ export default function DestroyedPlanetGroup(){
                     </mesh>
                 ))}
             </group>
-        </Box>
+        </group>
     )
 }
