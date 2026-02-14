@@ -2,39 +2,48 @@ import Ship from "../models/Ship.tsx";
 import {HoverRing} from "../HoverRing.tsx";
 import {useEffect, useRef, useState} from "react";
 import {useBounds, useCursor} from "@react-three/drei";
-import {Mesh, Vector3} from "three";
+import {Mesh, Vector3, MathUtils} from "three";
 import {LabelGroup} from "../LabelGroup.tsx";
-import {useThree} from "@react-three/fiber";
+import {useFrame, useThree} from "@react-three/fiber";
 
 export default function ShipGroup() {
     const [hover, setHover] = useState(false);
     const [zoomed, setZoomed] = useState(false);
     const meshRef = useRef<Mesh>(null!)
+    const currentXOffset = useRef(0)
     const api = useBounds()
     const { camera, size } = useThree()
-    useCursor(hover)
+    useCursor(hover && !zoomed)
+
+    useFrame((_state, delta) => {
+        const targetXOffset = zoomed ? size.width * 0.333 : 0
+        currentXOffset.current = MathUtils.lerp(currentXOffset.current, targetXOffset, delta * 4)
+
+        if (Math.abs(currentXOffset.current - targetXOffset) > 0.1 || zoomed) {
+            camera.setViewOffset(
+                size.width,
+                size.height,
+                currentXOffset.current,
+                0,
+                size.width,
+                size.height
+            )
+            camera.updateProjectionMatrix()
+        } else if (!zoomed && currentXOffset.current !== 0) {
+            camera.clearViewOffset()
+            currentXOffset.current = 0
+        }
+    })
 
     useEffect(() => {
         if (zoomed && meshRef.current) {
-            const viewWidth = size.width
-            const viewHeight = size.height
-            const xOffset = viewWidth * 0.333
-
-            camera.setViewOffset(
-                viewWidth,
-                viewHeight,
-                xOffset,
-                0,
-                viewWidth,
-                viewHeight
-            )
             api.refresh(meshRef.current).fit()
         }
-    }, [size, zoomed, camera, api]);
+    }, [size, zoomed, api]);
 
     function zoom() {
         if (meshRef.current) {
-            setZoomed(true)
+            setZoomed(!zoomed);
         }
     }
 
