@@ -32,8 +32,9 @@ export default function ShipGroup({ cameraRef }: {cameraRef: RefObject<CameraCon
                     }
                 );
             } else {
-                setZoomFocus(ZoomType.NONE)
-                cameraRef.current.reset(true)
+                cameraRef.current.reset(true).then(
+                    () => setZoomFocus(ZoomType.NONE)
+                )
             }
         }
     }
