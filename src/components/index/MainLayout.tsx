@@ -3,41 +3,40 @@ import {Box, Flex} from "@react-three/flex";
 import DestroyedPlanetGroup from "./DestroyedPlanetGroup.tsx";
 import SunGroup from "./SunGroup.tsx";
 import ShipGroup from "./ShipGroup.tsx";
-import {Bounds} from "@react-three/drei";
+import {CameraControls} from "@react-three/drei";
+import {type RefObject} from "react";
 
-export default function MainLayout() {
+export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraControls>}) {
     const { viewport } = useThree()
 
     return (
-        <Bounds clip>
-            <Flex
-                flexDirection="row"
-                justifyContent="space-between"
-                alignItems="flex-start"
-                paddingTop={1.5}
-                paddingRight={3}
-                paddingBottom={1.5}
-                paddingLeft={3}
-                width={viewport.width}
-                height={viewport.height}
-                position={[-viewport.width / 2, viewport.height / 2, 0]}
-            >
-                <Box flexDirection="column" height={viewport.height} justifyContent="space-between" >
-                    <Box>
-                        <SunGroup />
-                    </Box>
-
-                    <Box centerAnchor>
-                        <ShipGroup />
-                    </Box>
-
+        <Flex
+            flexDirection="row"
+            justifyContent="space-between"
+            alignItems="flex-start"
+            paddingTop={1.5}
+            paddingRight={3}
+            paddingBottom={1.5}
+            paddingLeft={3}
+            width={viewport.width}
+            height={viewport.height}
+            position={[-viewport.width / 2, viewport.height / 2, 0]}
+        >
+            <Box flexDirection="column" height={viewport.height} justifyContent="space-between" >
+                <Box>
+                    <SunGroup />
                 </Box>
 
-                <Box  alignSelf="flex-end" flexDirection="column">
-                    <DestroyedPlanetGroup />
+                <Box centerAnchor>
+                    <ShipGroup cameraRef={cameraRef}/>
                 </Box>
 
-            </Flex>
-        </Bounds>
+            </Box>
+
+            <Box  alignSelf="flex-end" flexDirection="column">
+                <DestroyedPlanetGroup />
+            </Box>
+
+        </Flex>
     )
 }

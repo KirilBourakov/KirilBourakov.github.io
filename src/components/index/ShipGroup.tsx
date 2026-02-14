@@ -1,79 +1,53 @@
 import Ship from "../models/Ship.tsx";
 import {HoverRing} from "../HoverRing.tsx";
-import {useEffect, useRef, useState} from "react";
-import {useBounds, useCursor} from "@react-three/drei";
-import {Mesh, Vector3, MathUtils} from "three";
+import {type RefObject, useRef, useState} from "react";
+import {type CameraControls, useCursor} from "@react-three/drei";
+import {Mesh, Vector3} from "three";
 import {LabelGroup} from "../LabelGroup.tsx";
-import {useFrame, useThree} from "@react-three/fiber";
 import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
 
-export default function ShipGroup() {
+export default function ShipGroup({ cameraRef }: {cameraRef: RefObject<CameraControls>}) {
     const [hover, setHover] = useState(false);
 
     // zoom state
     const { zoomFocus, setZoomFocus } = useZoom();
-    const prevZoomFocus = useRef(zoomFocus)
     const isZoomed = zoomFocus === ZoomType.PROJECTS
-
-    // camera position & offset state
-    const { camera, size } = useThree()
-    const initialCameraPosition = useRef<Vector3>(new Vector3())
-    useEffect(() => {initialCameraPosition.current.copy(camera.position)}, [])
-
-    const currentXOffset = useRef(0)
-    const boundsApi = useBounds()
 
     // meshes
     const meshRef = useRef<Mesh>(null!)
     useCursor(hover && !isZoomed)
 
-    // ZOOM LOGIC
-    useFrame((_state, delta) => {
-        const targetXOffset = isZoomed ? size.width * 0.333 : 0
-        currentXOffset.current = MathUtils.lerp(currentXOffset.current, targetXOffset, delta * 4)
-
-        if (Math.abs(currentXOffset.current - targetXOffset) > 0.01 || isZoomed) {
-            camera.setViewOffset(
-                size.width,
-                size.height,
-                currentXOffset.current,
-                0,
-                size.width,
-                size.height
-            )
-        } else if (!isZoomed && currentXOffset.current !== 0) {
-            camera.clearViewOffset()
-            currentXOffset.current = 0
-        }
-    })
-
-    useEffect(() => {
-        if (isZoomed && meshRef.current) {
-            boundsApi.refresh(meshRef.current).fit()
-        } else if (!isZoomed && prevZoomFocus.current === ZoomType.PROJECTS) {
-            boundsApi.to({
-                position: [initialCameraPosition.current.x, initialCameraPosition.current.y, initialCameraPosition.current.z],
-                target: [0, 0, 0]
-            })
-        }
-        prevZoomFocus.current = zoomFocus
-    }, [zoomFocus, boundsApi, isZoomed]);
-
     function zoom() {
         if (meshRef.current) {
-            setZoomFocus(ZoomType.PROJECTS);
+            if (zoomFocus == ZoomType.NONE) {
+                setZoomFocus(ZoomType.PROJECTS)
+                cameraRef.current.fitToBox(
+                    meshRef.current,
+                    true,
+                    {
+                        paddingLeft: 0,
+                        paddingRight: 0,
+                        paddingTop: 0,
+                        paddingBottom: 0
+                    }
+                );
+            } else {
+                setZoomFocus(ZoomType.NONE)
+                cameraRef.current.reset(true)
+            }
         }
     }
 
     return (
         <group position={[0, 2, -10]}  >
-            <group ref={meshRef}>
+            <group>
                 <Ship
                     scale={hover && !isZoomed ? .95 : .9}
                     rotation={[Math.PI, .4, 0]}
                     onPointerOver={() => setHover(true)}
                     onPointerOut={() => setHover(false)}
                     onClick={zoom}
+                    ref={meshRef}
                 />
 
                 {!isZoomed &&

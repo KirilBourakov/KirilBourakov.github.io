@@ -4,24 +4,20 @@ Command: npx gltfjsx@6.5.3 models/ship.glb --transform
 Files: models/ship.glb [220.8KB] > E:\Programming\Projects\personal-site\public\ship-transformed.glb [46.09KB] (79%)
 */
 
-import React, {useRef} from 'react'
 import { useGLTF } from '@react-three/drei'
-import {Mesh} from "three";
 import {useFrame} from "@react-three/fiber";
 
 export default function Ship(props) {
   const { nodes, materials } = useGLTF('/models/ship-transformed.glb')
 
-    const shipRef = useRef<Mesh>(null!)
-
     useFrame((state) => {
         const t = state.clock.getElapsedTime();
-        shipRef.current.rotation.z = Math.sin(t * 2) * 0.02;
-        shipRef.current.position.y = Math.cos(t * 4) * 0.01;
+        props.ref.current.rotation.z = Math.sin(t * 2) * 0.02;
+        props.ref.current.position.y = Math.cos(t * 4) * 0.01;
     });
 
   return (
-    <group {...props} dispose={null} ref={shipRef}>
+    <group {...props} dispose={null}>
       <mesh geometry={nodes.Object_9.geometry} material={materials.material_0} position={[0, 0.844, -0.938]} rotation={[Math.PI / 2, Math.PI / 2, 0]} />
       <mesh geometry={nodes.Object_26.geometry} material={materials.material_1} position={[-1.5, 0.75, 1.875]} />
       <mesh geometry={nodes.Object_40.geometry} material={materials.material_2} position={[-0.313, 0.738, 0.313]} />
