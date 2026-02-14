@@ -8,13 +8,23 @@ import {useFrame, useThree} from "@react-three/fiber";
 
 export default function ShipGroup() {
     const [hover, setHover] = useState(false);
+
+    // zooming state
     const [zoomed, setZoomed] = useState(false);
-    const meshRef = useRef<Mesh>(null!)
+    const prevZoomed = useRef(false)
+
+    // camera position & offset
+    const initialCameraPosition = useRef<Vector3>(new Vector3())
+    useEffect(() => {initialCameraPosition.current.copy(camera.position)}, [])
     const currentXOffset = useRef(0)
-    const api = useBounds()
+    const boundsApi = useBounds()
     const { camera, size } = useThree()
+
+    // meshes
+    const meshRef = useRef<Mesh>(null!)
     useCursor(hover && !zoomed)
 
+    // ZOOM LOGIC
     useFrame((_state, delta) => {
         const targetXOffset = zoomed ? size.width * 0.333 : 0
         currentXOffset.current = MathUtils.lerp(currentXOffset.current, targetXOffset, delta * 4)
@@ -37,9 +47,12 @@ export default function ShipGroup() {
 
     useEffect(() => {
         if (zoomed && meshRef.current) {
-            api.refresh(meshRef.current).fit()
+            boundsApi.refresh(meshRef.current).fit()
+        } else if (!zoomed && prevZoomed.current) {
+            boundsApi.to({ position: initialCameraPosition.current, target: [0, 0, 0] })
         }
-    }, [size, zoomed, api]);
+        prevZoomed.current = zoomed
+    }, [size, zoomed, boundsApi]);
 
     function zoom() {
         if (meshRef.current) {
