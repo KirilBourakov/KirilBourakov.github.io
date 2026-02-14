@@ -1,51 +1,76 @@
 import Ship from "../models/Ship.tsx";
 import {HoverRing} from "../HoverRing.tsx";
-import {useState} from "react";
-import {useCursor} from "@react-three/drei";
-import {Vector3} from "three";
+import {useRef, useState} from "react";
+import {useBounds, useCursor} from "@react-three/drei";
+import {Mesh, Vector3} from "three";
 import {LabelGroup} from "../LabelGroup.tsx";
+import {useThree} from "@react-three/fiber";
 
 export default function ShipGroup() {
     const [hover, setHover] = useState(false);
+    const [zoomed, setZoomed] = useState(false);
+    const meshRef = useRef<Mesh>(null!)
+    const api = useBounds()
+    const { camera, size } = useThree()
+    useCursor(hover)
 
-    useCursor(hover);
+    function zoom() {
+        if (meshRef.current) {
+            api.refresh(meshRef.current).fit()
 
-    function handleClick() {
-        console.log("clicked");
+            const viewWidth = size.width
+            const viewHeight = size.height
+            const xOffset = viewWidth * 0.333
+
+            camera.setViewOffset(
+                viewWidth,
+                viewHeight,
+                xOffset,
+                0,
+                viewWidth,
+                viewHeight
+            )
+
+            setZoomed(true)
+        }
     }
 
     return (
         <group position={[0, 2, -10]}  >
-            <group>
+            <group ref={meshRef}>
                 <Ship
                     scale={hover ? .95 : .9}
                     rotation={[Math.PI, .4, 0]}
                     onPointerOver={() => setHover(true)}
                     onPointerOut={() => setHover(false)}
+                    onClick={() => zoom()}
                 />
 
-
-                <HoverRing
-                    hover={hover}
-                    innerRadius={2.8}
-                    outerRadius={3.1}
-                    position={new Vector3(1,-.5,0)}
-                />
+                {!zoomed &&
+                    <HoverRing
+                        hover={hover}
+                        innerRadius={2.8}
+                        outerRadius={3.1}
+                        position={new Vector3(1,-.5,0)}
+                    />
+                }
             </group>
 
-            <LabelGroup
-                hover={hover}
-                setHover={setHover}
-                handleClick={handleClick}
-                linePoints={[
-                    new Vector3(0, -.5, 0),
-                    new Vector3(0, -4.6, 0),
-                    new Vector3(-0.5, -4.6, 0)
-                ]}
-                htmlPos={new Vector3(-0.5, -4.2, 0)}
-                align="left"
-                text={"[ PROJECTS ]"}
-            />
+            {!zoomed &&
+                <LabelGroup
+                    hover={hover}
+                    setHover={setHover}
+                    handleClick={zoom}
+                    linePoints={[
+                        new Vector3(0, -.5, 0),
+                        new Vector3(0, -4.6, 0),
+                        new Vector3(-0.5, -4.6, 0)
+                    ]}
+                    htmlPos={new Vector3(-0.5, -4.2, 0)}
+                    align="left"
+                    text={"[ PROJECTS ]"}
+                />
+            }
         </group>
 
     )
