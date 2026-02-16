@@ -1,9 +1,10 @@
 import ProjectsItem from '../overlays/ProjectsItem.tsx';
+import data from './projects.json'
 
 export default function Projects({ unzoom } : {unzoom: () => void}) {
     return (
-        <div className={`absolute right-0 top-0 w-screen h-screen lg:w-2/3 bg-black/50`}>
-            <div className="flex m-1 mr-2">
+        <div className={`absolute right-0 top-0 w-screen h-screen lg:w-2/3 bg-black/50 overflow-y-scroll`}>
+            <div className="flex m-1 mr-2 mb-3">
 
                 <button
                     onClick={unzoom}
@@ -23,8 +24,9 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
             </div>
 
             <div className="flex flex-col pl-[1.8%]">
-                <ProjectsItem reversed={false} />
-                <ProjectsItem reversed={true} />
+                {data.map((item, index) => (
+                    <ProjectsItem reversed={false} data={item} key={index}/>
+                ))}
             </div>
         </div>
     )
