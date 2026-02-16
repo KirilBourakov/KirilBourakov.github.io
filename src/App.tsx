@@ -2,26 +2,13 @@ import {Canvas} from '@react-three/fiber'
 import {Bloom, EffectComposer} from "@react-three/postprocessing";
 import MainLayout from "./components/index/MainLayout.tsx";
 import {ZoomContextProvider} from "./hooks/ZoomContext.tsx";
-import Overlays from "./components/Overlays/Overlays.tsx";
-import {useMemo, useRef} from "react";
+import OverlayManager from "./components/overlays/OverlayManager.tsx";
+import {useRef} from "react";
 import {CameraControls} from "@react-three/drei";
 
 
 export default function App() {
     const cameraRef = useRef<CameraControls>(null!)
-
-    const mouseButtons = useMemo(() => ({
-        left: 0,
-        middle: 0,
-        right: 0,
-        wheel: 0
-    }), [])
-
-    const touches = useMemo(() => ({
-        one: 0,
-        two: 0,
-        three: 0,
-    }), [])
 
     return (
         <ZoomContextProvider>
@@ -35,8 +22,17 @@ export default function App() {
                         <CameraControls
                             ref={cameraRef}
                             makeDefault
-                            mouseButtons={mouseButtons}
-                            touches={touches}
+                            mouseButtons={{
+                                left: 0,
+                                middle: 0,
+                                right: 0,
+                                wheel: 0
+                            }}
+                            touches={{
+                                one: 0,
+                                two: 0,
+                                three: 0,
+                            }}
                         />
 
                         <MainLayout cameraRef={cameraRef}/>
@@ -45,7 +41,7 @@ export default function App() {
                     </Canvas>
                 </div>
 
-                <Overlays cameraRef={cameraRef} />
+                <OverlayManager cameraRef={cameraRef} />
             </div>
         </ZoomContextProvider>
     )

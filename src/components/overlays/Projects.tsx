@@ -1,4 +1,4 @@
-import ProjectsItem from "./ProjectsItem.tsx";
+import ProjectsItem from '../overlays/ProjectsItem.tsx';
 
 export default function Projects({ unzoom } : {unzoom: () => void}) {
     return (

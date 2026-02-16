@@ -1,10 +1,10 @@
 import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
 import type {RefObject} from "react";
 import type {CameraControls} from "@react-three/drei";
-import Projects from "./Projects.tsx";
+import Projects from "../overlays/Projects.tsx";
 
 
-export default function Overlays({cameraRef}: {cameraRef: RefObject<CameraControls>}) {
+export default function OverlayManager({cameraRef}: {cameraRef: RefObject<CameraControls>}) {
     const { zoomFocus, setZoomFocus } = useZoom();
 
     function unzoom(){
