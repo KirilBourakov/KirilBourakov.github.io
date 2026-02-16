@@ -1,3 +1,4 @@
+import {useState} from "react";
 
 interface DataType{
         title: string
@@ -42,21 +43,58 @@ function Text({data}: {data: DataType}) {
 }
 
 function Image({reversed, data}: { reversed: boolean, data: DataType }) {
-    const icon = data.icons && data.icons.length > 0 ? data.icons[0] : null;
-    const src = icon ? `/img/${icon.img}` : "https://christopherscottedwards.com/wp-content/uploads/2018/07/Generic-Profile.jpg";
-    const alt = icon ? icon.alt : "Placeholder Image";
+    const [index, setIndex] = useState(0)
+
+    function handleClick(dir: 1 | -1){
+        if (data.icons && data.icons.length > 0){
+            let newIndex = (index + dir) % data.icons.length
+            newIndex = newIndex < 0 ? data.icons.length - 1 : newIndex
+            setIndex(newIndex)
+        }
+    }
+
+    function getSrc(){
+        if (data.icons && data.icons.length > 0){
+            return `/img/${data.icons[index].img}`
+        }
+        return "https://christopherscottedwards.com/wp-content/uploads/2018/07/Generic-Profile.jpg"
+    }
+
+    function getAlt(){
+        if (data.icons && data.icons.length > 0){
+            return data.icons[index].alt
+        }
+        return "Placeholder Image"
+    }
 
     return (
-        <div className={`flex-1 ${reversed ? 'ml-2' : 'mr-2'} relative overflow-hidden shadow-lg bg-gray-900 h-64 rounded-sm border border-white/10 group`}>
-            <img
-                src={src}
-                alt={alt}
-                className="w-full h-full object-cover object-top transition-all duration-3000 ease-in-out group-hover:object-bottom cursor-zoom-in"
-            />
+        <div className={`flex-1 ${reversed ? 'ml-2' : 'mr-2'} relative overflow-hidden shadow-lg bg-gray-900 h-64 rounded-sm border border-white/10`}>
+            <div className="w-full h-full group">
+                <img
+                    src={getSrc()}
+                    alt={getAlt()}
+                    className="w-full h-full object-cover object-top transition-all duration-3000 ease-in-out group-hover:object-bottom"
+                />
+            </div>
             {data.icons && data.icons.length > 1 && (
-                <div className="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded backdrop-blur-sm border border-white/10">
+                <div className="absolute bottom-2 right-2 bg-black/70 text-white text-[10px] px-1.5 py-0.5 rounded backdrop-blur-sm border border-white/10 pointer-events-none">
                     +{data.icons.length - 1} more
                 </div>
+            )}
+            {data.icons && data.icons.length > 1 && (
+                ["\u2192", "\u2190"].map((icon, iconIdx) => (
+                    <div
+                        key={iconIdx}
+                        className={
+                            `hover:cursor-pointer hover:bg-black/70 select-none absolute top-1/2 -translate-y-1/2 bg-black/50 
+                            transition-all duration-250 text-white text-[12px] px-1.5 py-0.5 rounded backdrop-blur-sm 
+                            border border-white/10 z-10 ${iconIdx === 0 ? "right-1" : "left-1"}`
+                        }
+                        onClick={() => handleClick(iconIdx === 0 ? 1 : -1)}
+                    >
+                        {icon}
+                    </div>
+                ))
             )}
         </div>
     )

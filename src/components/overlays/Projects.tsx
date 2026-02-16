@@ -8,7 +8,7 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
 
                 <button
                     onClick={unzoom}
-                    className={" bg-orange-500 basis-2/12 -mr-4 text-white hover:bg-orange-700 hover:cursor-pointer"}
+                    className={" bg-orange-500 basis-2/12 -mr-4 text-white hover:bg-orange-700 hover:cursor-pointer transition-all duration-500"}
                     style={{ clipPath: 'polygon(0% 0%, 85% 0%, 100% 100%, 15% 100%)' }}
                 >
                     Back
