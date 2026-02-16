@@ -10,12 +10,17 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
         return () => clearTimeout(timer);
     }, []);
 
+    function zoomOut(){
+        setVisible(false)
+        unzoom();
+    }
+
     return (
         <div className={`absolute right-0 top-0 w-screen h-screen lg:w-2/3 bg-black/80 backdrop-blur-md overflow-y-scroll transition-all duration-500 ease-in-out ${visible ? 'opacity-100' : 'opacity-0'}`}>
             <div className="flex m-1 mr-2 mb-3 sticky top-0 z-20 bg-black/20 backdrop-blur-sm pb-2">
 
                 <button
-                    onClick={unzoom}
+                    onClick={zoomOut}
                     className={" bg-orange-500 basis-2/12 -mr-4 text-white hover:bg-orange-700 hover:cursor-pointer transition-all duration-500"}
                     style={{ clipPath: 'polygon(0% 0%, 85% 0%, 100% 100%, 15% 100%)' }}
                 >
