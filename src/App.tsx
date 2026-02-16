@@ -2,7 +2,7 @@ import {Canvas} from '@react-three/fiber'
 import {Bloom, EffectComposer} from "@react-three/postprocessing";
 import MainLayout from "./components/index/MainLayout.tsx";
 import {ZoomContextProvider} from "./hooks/ZoomContext.tsx";
-import Overlays from "./components/Overlays.tsx";
+import Overlays from "./components/Overlays/Overlays.tsx";
 import {useMemo, useRef} from "react";
 import {CameraControls} from "@react-three/drei";
 

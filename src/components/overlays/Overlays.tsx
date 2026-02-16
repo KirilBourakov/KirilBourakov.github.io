@@ -1,6 +1,7 @@
-import {useZoom, ZoomType} from "../hooks/ZoomContext.tsx";
+import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
 import type {RefObject} from "react";
 import type {CameraControls} from "@react-three/drei";
+import Projects from "./Projects.tsx";
 
 
 export default function Overlays({cameraRef}: {cameraRef: RefObject<CameraControls>}) {
@@ -13,11 +14,7 @@ export default function Overlays({cameraRef}: {cameraRef: RefObject<CameraContro
     }
 
     if (zoomFocus == ZoomType.PROJECTS){
-        return (
-            <div className="absolute right-0 top-0 w-screen h-screen lg:w-2/3 bg-white/50" onClick={unzoom}>
-                Projects Here
-            </div>
-        )
+        return <Projects unzoom={unzoom} />
     }
-    return null
+    return <Projects unzoom={unzoom} />
 }
