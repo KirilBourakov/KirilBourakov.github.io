@@ -1,10 +1,18 @@
+import { useEffect, useState } from 'react';
 import ProjectsItem from '../overlays/ProjectsItem.tsx';
 import data from './projects.json'
 
 export default function Projects({ unzoom } : {unzoom: () => void}) {
+    const [visible, setVisible] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setVisible(true), 500);
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
-        <div className={`absolute right-0 top-0 w-screen h-screen lg:w-2/3 bg-black/50 overflow-y-scroll`}>
-            <div className="flex m-1 mr-2 mb-3">
+        <div className={`absolute right-0 top-0 w-screen h-screen lg:w-2/3 bg-black/80 backdrop-blur-md overflow-y-scroll transition-all duration-500 ease-in-out ${visible ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="flex m-1 mr-2 mb-3 sticky top-0 z-20 bg-black/20 backdrop-blur-sm pb-2">
 
                 <button
                     onClick={unzoom}
@@ -25,7 +33,17 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
 
             <div className="flex flex-col pl-[1.8%]">
                 {data.map((item, index) => (
-                    <ProjectsItem reversed={false} data={item} key={index}/>
+                    <div
+                        key={index}
+                        className="transition-all duration-700 ease-out"
+                        style={{
+                            transitionDelay: `${200 + index * 150}ms`,
+                            transform: visible ? 'translateY(0)' : 'translateY(40px)',
+                            opacity: visible ? 1 : 0
+                        }}
+                    >
+                        <ProjectsItem reversed={index % 2 !== 0} data={item} />
+                    </div>
                 ))}
             </div>
         </div>
