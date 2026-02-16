@@ -1,3 +1,5 @@
+import ProjectsItem from "./ProjectsItem.tsx";
+
 export default function Projects({ unzoom } : {unzoom: () => void}) {
 
 
@@ -22,7 +24,7 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
 
             </div>
 
-            {/*<hr className="bg-orange-500 text-orange-500 w-11/12 mx-auto" />*/}
+            <ProjectsItem />
         </div>
     )
 }
