@@ -22,8 +22,10 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
 
             </div>
 
-            <ProjectsItem reversed={false} />
-            <ProjectsItem reversed={true} />
+            <div className="flex flex-col pl-[1.8%]">
+                <ProjectsItem reversed={false} />
+                <ProjectsItem reversed={true} />
+            </div>
         </div>
     )
 }
