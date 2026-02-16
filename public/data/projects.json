@@ -1,0 +1,71 @@
+[
+  {
+    "title": "Textbox",
+    "type": "web",
+    "main": "This is a simple social media platform, in the style of twitter or Instagram, and implements the following functionality:",
+    "points": [
+      "Create account / login",
+      "Create post and comment",
+      "Follow user",
+      "Custom homepage based on likes and follows."
+    ],
+    "icons": null
+  },
+  {
+    "title": "Sherry",
+    "type": "web",
+    "main": "Sherry is a file sharing cloud storage platform in the style of google drive, and implements the following functionality:",
+    "points": [
+      "Create account / login",
+      "Upload file",
+      "Organize files using folders and tags",
+      "Share files with specific users, or make them public",
+      "Search files"
+    ],
+    "icons": null
+  },
+  {
+    "title": "Folding@RHS",
+    "type": "physical",
+    "main": "Folding@RHS is a project where old, often broken, school computers are restored and have their computing power donated to medical science via the Folding@home project.",
+    "points": [
+      "Restored 14 computers.",
+      "Created a master computer to monitoring of all systems at once.",
+      "Created Bash scripts to automate the installation of key software."
+    ],
+    "icons": [
+      {
+        "img": "dnart1.jpg",
+        "alt": "DNART screen fully lit up."
+      },
+      {
+        "img": "dnart2.jpg",
+        "alt": "DNART wiring."
+      },
+      {
+        "img": "dnart2.jpg",
+        "alt": "DNART screen fully lit up with lidar visible."
+      }
+    ]
+  },
+  {
+    "title": "DNART",
+    "type": "physical",
+    "main": "DNART is an Electrical Art project that displays the strands of insulin and scrolls based on movement detected by a lidar rangefinder.",
+    "points": [
+      "Wrote and debugged code for Microbit to ensure smooth movement and radio communication.",
+      "Worked with both Microbit (for initial testing) and Arduino (for final version).",
+      "Isolated and eliminated faulty wiring."
+    ],
+    "icons": [
+      {
+        "img": "folding1.jpg",
+        "alt": "Folding computers."
+      },
+      {
+        "img": "folding2.jpg",
+        "alt": "Folding management screen."
+      }
+    ]
+  }
+]
