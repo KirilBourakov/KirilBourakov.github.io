@@ -1,11 +1,9 @@
 import ProjectsItem from "./ProjectsItem.tsx";
 
 export default function Projects({ unzoom } : {unzoom: () => void}) {
-
-
     return (
         <div className={`absolute right-0 top-0 w-screen h-screen lg:w-2/3 bg-black/50`}>
-            <div className="flex m-1">
+            <div className="flex m-1 mr-2">
 
                 <button
                     onClick={unzoom}
@@ -24,7 +22,8 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
 
             </div>
 
-            <ProjectsItem />
+            <ProjectsItem reversed={false} />
+            <ProjectsItem reversed={true} />
         </div>
     )
 }
