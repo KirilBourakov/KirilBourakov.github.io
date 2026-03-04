@@ -37,7 +37,7 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
 
     return (
         <div className={`absolute right-0 top-0 w-screen h-screen lg:w-2/3 bg-black/80 backdrop-blur-md overflow-y-scroll transition-all duration-500 ease-in-out ${visible ? 'opacity-100' : 'opacity-0'}`}>
-            <div className="flex m-1 mr-2 sticky top-0 z-20 bg-black/20 backdrop-blur-sm">
+            <div className="flex m-1 mr-2 top-0 z-20 bg-black/20 backdrop-blur-sm">
 
                 <button
                     onClick={zoomOut}
