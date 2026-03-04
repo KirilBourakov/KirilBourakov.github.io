@@ -12,17 +12,18 @@ interface DataType{
 }
 
 export default function ProjectsItem({reversed, data}: { reversed: boolean, data: DataType }) {
+    const hasIcons = data.icons && data.icons.length > 0;
     return (
         <div className={`flex mb-4 mx-2 ${reversed ? 'flex-row-reverse' : 'flex-row'}`}>
-            <Image reversed={reversed} data={data} />
-            <Text data={data}/>
+            {hasIcons && <Image reversed={reversed} data={data} />}
+            <Text data={data} fullWidth={!hasIcons}/>
         </div>
     )
 }
 
-function Text({data}: {data: DataType}) {
+function Text({data, fullWidth}: {data: DataType, fullWidth: boolean}) {
     return (
-        <div className={`flex-2 text-white bg-orange-400 p-4 shadow-md`}>
+        <div className={`${fullWidth ? 'flex-1' : 'flex-2'} text-white bg-orange-400 p-4 shadow-md`}>
             <div className={"flex pb-2"}>
                 <h2 className={"text-2xl font-bold"}>{data.title}</h2>
             </div>
@@ -54,17 +55,11 @@ function Image({reversed, data}: { reversed: boolean, data: DataType }) {
     }
 
     function getSrc(){
-        if (data.icons && data.icons.length > 0){
-            return `/img/${data.icons[index].img}`
-        }
-        return "https://christopherscottedwards.com/wp-content/uploads/2018/07/Generic-Profile.jpg"
+        return `/img/${data.icons![index].img}`
     }
 
     function getAlt(){
-        if (data.icons && data.icons.length > 0){
-            return data.icons[index].alt
-        }
-        return "Placeholder Image"
+        return data.icons![index].alt
     }
 
     return (
