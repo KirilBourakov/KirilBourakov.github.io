@@ -46,14 +46,17 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
             </div>
 
             <div className="flex ml-[1.8%] mb-3">
-                <div className="flex w-full mx-2 bg-orange-500">
+                <div className="flex w-full mx-2 bg-orange-400">
                     {[...tags].map((tag, index) => (
                         <button
                             key={`tag-${index}`}
-                            className="p-3 text-white bg-orange-500 hover:bg-orange-700 hover:cursor-pointer transition-all duration-250"
+                            className={
+                                `p-3 text-white hover:cursor-pointer transition-all duration-250 font-bold 
+                                ${tag === focus ? "bg-orange-700 shadow-inner" : "hover:bg-orange-500 hover:scale-110"}`
+                            }
                             onClick={() => setFocus(tag)}
                         >
-                            {tag}
+                            {tag.charAt(0).toUpperCase() + tag.slice(1)}
                         </button>
                     ))}
                 </div>
