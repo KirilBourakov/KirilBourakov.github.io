@@ -56,7 +56,7 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
 
             </div>
 
-            <div className="flex flex-col lg:flex-row ml-[1.8%] mb-3 gap-2 mr-2">
+            <div className="flex flex-col lg:flex-row ml-[2.4%] mb-3 gap-2 mr-2">
                 <div className="flex flex-1 bg-orange-400">
                     {[...tags].map((tag, index) => (
                         <button
