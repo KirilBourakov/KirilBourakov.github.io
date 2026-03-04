@@ -9,7 +9,9 @@
       "Follow user",
       "Custom homepage based on likes and follows."
     ],
-    "icons": null
+    "icons": null,
+    "start": 2023,
+    "end": 2023
   },
   {
     "title": "Sherry",
@@ -22,7 +24,9 @@
       "Share files with specific users, or make them public",
       "Search files"
     ],
-    "icons": null
+    "icons": null,
+    "start": 2023,
+    "end": 2024
   },
   {
     "title": "Folding@RHS",
@@ -32,6 +36,28 @@
       "Restored 14 computers.",
       "Created a master computer to monitoring of all systems at once.",
       "Created Bash scripts to automate the installation of key software."
+    ],
+    "icons": [
+      {
+        "img": "folding1.jpg",
+        "alt": "Folding computers."
+      },
+      {
+        "img": "folding2.jpg",
+        "alt": "Folding management screen."
+      }
+    ],
+    "start": 2024,
+    "end": 2024
+  },
+  {
+    "title": "DNART",
+    "type": "physical",
+    "main": "DNART is an Electrical Art project that displays the strands of insulin and scrolls based on movement detected by a lidar rangefinder.",
+    "points": [
+      "Wrote and debugged code for Microbit to ensure smooth movement and radio communication.",
+      "Worked with both Microbit (for initial testing) and Arduino (for final version).",
+      "Isolated and eliminated faulty wiring."
     ],
     "icons": [
       {
@@ -46,26 +72,8 @@
         "img": "dnart3.jpg",
         "alt": "DNART screen fully lit up with lidar visible."
       }
-    ]
-  },
-  {
-    "title": "DNART",
-    "type": "physical",
-    "main": "DNART is an Electrical Art project that displays the strands of insulin and scrolls based on movement detected by a lidar rangefinder.",
-    "points": [
-      "Wrote and debugged code for Microbit to ensure smooth movement and radio communication.",
-      "Worked with both Microbit (for initial testing) and Arduino (for final version).",
-      "Isolated and eliminated faulty wiring."
     ],
-    "icons": [
-      {
-        "img": "folding1.jpg",
-        "alt": "Folding computers."
-      },
-      {
-        "img": "folding2.jpg",
-        "alt": "Folding management screen."
-      }
-    ]
+    "start": 2022,
+    "end": 2024
   }
 ]
