@@ -9,7 +9,7 @@ export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraCon
     const { viewport } = useThree()
 
     const left = -viewport.width / 2 + 3
-    const right = viewport.width / 2 - 6
+    const right = viewport.width / 2 - 4
     const top = viewport.height / 2 - 1.5
     const bottom = -viewport.height / 2 + 1.5
     const planetBottom = -viewport.height / 2 + 3
@@ -20,7 +20,7 @@ export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraCon
                 <SunGroup />
             </group>
 
-            <group position={[left, bottom, 0]}>
+            <group position={[left, bottom, 5]}>
                 <ShipGroup cameraRef={cameraRef}/>
             </group>
 

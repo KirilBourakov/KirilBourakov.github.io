@@ -51,7 +51,7 @@ export default function ShipGroup({ cameraRef }: {cameraRef: RefObject<CameraCon
                         hover={hover}
                         innerRadius={2.8}
                         outerRadius={3.1}
-                        position={new Vector3(1,-.5,0)}
+                        position={new Vector3(.5,-.7,0)}
                     />
                 }
             </group>
