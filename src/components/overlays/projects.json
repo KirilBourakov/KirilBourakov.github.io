@@ -30,7 +30,7 @@
   },
   {
     "title": "Folding@RHS",
-    "type": "physical",
+    "type": "hardware",
     "main": "Folding@RHS is a project where old, often broken, school computers are restored and have their computing power donated to medical science via the Folding@home project.",
     "points": [
       "Restored 14 computers.",
@@ -52,7 +52,7 @@
   },
   {
     "title": "DNART",
-    "type": "physical",
+    "type": "hardware",
     "main": "DNART is an Electrical Art project that displays the strands of insulin and scrolls based on movement detected by a lidar rangefinder.",
     "points": [
       "Wrote and debugged code for Microbit to ensure smooth movement and radio communication.",
