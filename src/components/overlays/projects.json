@@ -93,5 +93,37 @@
     ],
     "start": 2025,
     "end": 2026
+  },
+  {
+    "title": "Flappy AI",
+    "type": "Core Engineering",
+    "main": "A evolutionary algorithm that trains an AI to play Flappy Bird using an Evolutionary Algorithm. Built with the Godot Engine and C#.",
+    "points": [
+      "Custom implementation of an evolutionary algorithm.",
+      "Real-time Training, which allows watching each generation progressively get better at the game."
+    ],
+    "start": 2024,
+    "end": 2025
+  },
+  {
+    "title": "Statblock-JSONify",
+    "type": "Core Engineering",
+    "main": "This app can convert homebrewery markdown, as well as images of statblocks, into JSON usable by automated tools.",
+    "points": [
+      "Searches and extracts stat blocks from Homebrewery markdown to JSON.",
+      "OCR to extract text from images and converts that to markdown."
+    ],
+    "icons": [
+      {
+        "img": "jsonify1.png",
+        "alt": "Homebrewery markdown pre-conversion."
+      },
+      {
+        "img": "jsonify2.png",
+        "alt": "Statblock post conversion."
+      }
+    ],
+    "start": 2024,
+    "end": 2025
   }
 ]
