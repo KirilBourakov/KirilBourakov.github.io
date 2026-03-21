@@ -75,5 +75,23 @@
     ],
     "start": 2022,
     "end": 2024
+  },
+  {
+    "title": "PestoFish2",
+    "type": "Core Engineering",
+    "main": "Pestofish2 is an an advanced and optimized chess engine written in C++, that plays at grand master level.",
+    "points": [
+      "Advanced search, featuring Negamax with Alpha-Beta pruning, quasiance, late move reduction and check extensions.",
+      "Efficient multithreading, using LazySMP.",
+      "An efficently updateable neural network for position evaluation."
+    ],
+    "icons": [
+      {
+        "img": "pestofish2.png",
+        "alt": "Pestofish2 defeating a master level chess engine."
+      }
+    ],
+    "start": 2025,
+    "end": 2026
   }
 ]
