@@ -6,7 +6,7 @@ import OverlayManager from "./components/overlays/OverlayManager.tsx";
 import {useRef} from "react";
 import {CameraControls} from "@react-three/drei";
 
-
+// Main app
 export default function App() {
     const cameraRef = useRef<CameraControls>(null!)
 
