@@ -1,9 +1,13 @@
 import {MdCheck, MdContentCopy} from "react-icons/md";
 import {useState} from "react";
+import {FaGithub, FaLinkedin} from "react-icons/fa";
+import { IconContext } from "react-icons";
 
 export default function AboutMe() {
     const [isCopied, setIsCopied] = useState(false);
     const email = "kirbou06012@gmail.com";
+    const githubUrl = "https://github.com/KirilBourakov"
+    const linkedinUrl = "https://www.linkedin.com/in/kiril-bourakov/"
 
     const handleCopy = async () => {
         try {
@@ -42,6 +46,23 @@ export default function AboutMe() {
                         </div>
                     </div>
                     <h2 className="px-1">Phone: (506) 997-0081</h2>
+
+                    <IconContext.Provider value={{ size: "20" }}>
+                        <div className="flex">
+                            <div
+                                className="ml-auto hover:cursor-pointer transition-all hover:scale-110"
+                                onClick={() => window.open(githubUrl, '_blank')}
+                            >
+                                <FaGithub scale={5} />
+                            </div>
+                            <div
+                                className="mr-3 hover:cursor-pointer transition-all hover:scale-110"
+                                onClick={() => window.open(linkedinUrl, '_blank')}
+                            >
+                                <FaLinkedin scale={5} />
+                            </div>
+                        </div>
+                    </IconContext.Provider>
                 </div>
 
             </div>
