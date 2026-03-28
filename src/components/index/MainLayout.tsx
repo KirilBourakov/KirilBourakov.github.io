@@ -5,26 +5,33 @@ import ShipGroup from "./ShipGroup.tsx";
 import {CameraControls} from "@react-three/drei";
 import {type RefObject} from "react";
 
-export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraControls>}) {
-    const { viewport } = useThree()
+const BREAKPOINT = 1400;
 
-    const left = -viewport.width / 2 + 3
-    const right = viewport.width / 2 - 4
-    const top = viewport.height / 2 - 1.5
-    const bottom = -viewport.height / 2 + 1.5
-    const planetBottom = -viewport.height / 2 + 3
+export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraControls>}) {
+    const { size, viewport } = useThree();
+    const isMobile = size.width < BREAKPOINT;
+
+    const sunGroupX = isMobile ? .5 : -viewport.width / 2 + 3;
+    const sunGroupY = isMobile ? viewport.height / 2 - 2 : viewport.height / 2 - 1.5;
+
+    const shipX = isMobile ? -.5 : -viewport.width / 2 + 3;
+    const shipY = isMobile ? -0.5 : -viewport.height / 2 + 1.5;
+
+    const destroyedPlanetY = isMobile ? -viewport.height / 2 - 1 : -viewport.height / 2 + 3;
+    const destroyedPlanetX = isMobile ? 2 : (viewport.width / 2 - 4);
+    const destroyedPlanetZ = isMobile ? -5 : 0;
 
     return (
         <group>
-            <group position={[left, top, 0]}>
+            <group position={[sunGroupX, sunGroupY, 0]}>
                 <SunGroup />
             </group>
 
-            <group position={[left, bottom, 5]}>
+            <group position={[shipX, shipY, 5]}>
                 <ShipGroup cameraRef={cameraRef}/>
             </group>
 
-            <group position={[right, planetBottom, 0]}>
+            <group position={[destroyedPlanetX, destroyedPlanetY, destroyedPlanetZ]}>
                 <DestroyedPlanetGroup />
             </group>
         </group>
