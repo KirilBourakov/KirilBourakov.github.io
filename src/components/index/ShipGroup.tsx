@@ -24,10 +24,10 @@ export default function ShipGroup({ cameraRef }: {cameraRef: RefObject<CameraCon
                 meshRef.current,
                 true,
                 {
-                    paddingLeft: -4,
-                    paddingRight: 0,
-                    paddingTop: 0,
-                    paddingBottom: 0
+                    paddingLeft: -6,
+                    paddingRight: 1.2,
+                    paddingTop: 1.2,
+                    paddingBottom: 1.2
                 }
             );
 
