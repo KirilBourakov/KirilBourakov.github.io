@@ -10,7 +10,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   import.meta.url,
 ).toString();
 
-export default function Resume({ unzoom }: { unzoom?: () => void }) {
+export default function Resume({ unzoom }: { unzoom: () => void }) {
     const [visible, setVisible] = useState(false);
     const [containerWidth, setContainerWidth] = useState<number | null>(null);
     const containerRef = useRef<HTMLDivElement>(null);
@@ -34,10 +34,8 @@ export default function Resume({ unzoom }: { unzoom?: () => void }) {
     }, []);
 
     function zoomOut() {
-        setVisible(false);
-        if (unzoom) {
-            setTimeout(unzoom, 500); // Wait for fade out
-        }
+        setVisible(false)
+        unzoom()
     }
 
     return (

@@ -18,5 +18,10 @@ export default function OverlayManager({cameraRef}: {cameraRef: RefObject<Camera
     if (zoomFocus == ZoomType.PROJECTS){
         return <Projects unzoom={unzoom} />
     }
-    return <Resume />
+
+    if (zoomFocus == ZoomType.RESUME){
+        return <Resume unzoom={unzoom}/>
+    }
+
+    return <AboutMe />
 }

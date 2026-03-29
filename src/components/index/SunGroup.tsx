@@ -5,9 +5,11 @@ import Sun from "../models/Sun.tsx";
 import {useCursor} from "@react-three/drei";
 import {HoverRing} from "../HoverRing.tsx";
 import {LabelGroup} from "../LabelGroup.tsx";
+import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
 
 const url = "https://docs.google.com/document/d/1aRAI3thIlpdJlXqOyzp41LANNzH5nz7OcpcrcVGc3ro/edit?usp=sharing"
 export default function SunGroup({ isMobile } : { isMobile : boolean }) {
+    const { zoomFocus, setZoomFocus } = useZoom();
     const [hover, setHover] = useState(false);
     const meshRef = useRef<Mesh>(null!)
     const linePoints = isMobile ? [
@@ -28,7 +30,7 @@ export default function SunGroup({ isMobile } : { isMobile : boolean }) {
     useCursor(hover);
 
     const handleClick = () => {
-        window.open(url, '_blank');
+        setZoomFocus(ZoomType.RESUME)
     }
 
     return (
