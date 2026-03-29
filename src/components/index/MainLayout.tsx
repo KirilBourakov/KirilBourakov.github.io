@@ -12,7 +12,7 @@ export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraCon
     const isMobile = size.width < BREAKPOINT;
 
     const sunGroupX = isMobile ? .5 : -viewport.width / 2 + 3;
-    const sunGroupY = isMobile ? viewport.height / 2 - 1.8 : viewport.height / 2 - 1.5;
+    const sunGroupY = isMobile ? viewport.height / 2 - 2.3 : viewport.height / 2 - 1.5;
 
     const shipX = isMobile ? -.5 : -viewport.width / 2 + 3;
     const shipY = isMobile ? -0.5 : -viewport.height / 2 + 1.5;
