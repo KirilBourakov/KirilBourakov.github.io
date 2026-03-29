@@ -6,8 +6,18 @@ import {Mesh, Vector3} from "three";
 import {LabelGroup} from "../LabelGroup.tsx";
 import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
 
-export default function ShipGroup({ cameraRef }: {cameraRef: RefObject<CameraControls>}) {
+export default function ShipGroup({ cameraRef, isMobile }: {cameraRef: RefObject<CameraControls>, isMobile : boolean}) {
     const [hover, setHover] = useState(false);
+
+    const linePoints = isMobile ? [
+        new Vector3(0, -.5, 0),
+        new Vector3(0, -2.2, 0),
+        new Vector3(-0.5, -2.2, 0)
+    ] : [
+        new Vector3(0, -.5, 0),
+        new Vector3(0, -4.4, 0),
+        new Vector3(-0.5, -4.4, 0)
+    ];
 
     // zoom state
     const { zoomFocus, setZoomFocus } = useZoom();
@@ -61,12 +71,7 @@ export default function ShipGroup({ cameraRef }: {cameraRef: RefObject<CameraCon
                     hover={hover}
                     setHover={setHover}
                     handleClick={zoom}
-                    linePoints={[
-                        new Vector3(0, -.5, 0),
-                        new Vector3(0, -4.6, 0),
-                        new Vector3(-0.5, -4.6, 0)
-                    ]}
-                    htmlPos={new Vector3(-0.5, -4.2, 0)}
+                    linePoints={linePoints}
                     align="left"
                     text={"[ PROJECTS ]"}
                 />

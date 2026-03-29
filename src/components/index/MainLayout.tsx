@@ -12,23 +12,23 @@ export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraCon
     const isMobile = size.width < BREAKPOINT;
 
     const sunGroupX = isMobile ? .5 : -viewport.width / 2 + 3;
-    const sunGroupY = isMobile ? viewport.height / 2 - 2 : viewport.height / 2 - 1.5;
+    const sunGroupY = isMobile ? viewport.height / 2 - 1.8 : viewport.height / 2 - 1.5;
 
     const shipX = isMobile ? -.5 : -viewport.width / 2 + 3;
     const shipY = isMobile ? -0.5 : -viewport.height / 2 + 1.5;
 
     const destroyedPlanetY = isMobile ? -viewport.height / 2 - 1 : -viewport.height / 2 + 3;
-    const destroyedPlanetX = isMobile ? 2 : (viewport.width / 2 - 4);
+    const destroyedPlanetX = isMobile ? 4 : (viewport.width / 2 - 4);
     const destroyedPlanetZ = isMobile ? -5 : 0;
 
     return (
         <group>
             <group position={[sunGroupX, sunGroupY, 0]}>
-                <SunGroup />
+                <SunGroup isMobile={isMobile} />
             </group>
 
             <group position={[shipX, shipY, 5]}>
-                <ShipGroup cameraRef={cameraRef}/>
+                <ShipGroup cameraRef={cameraRef} isMobile={isMobile}/>
             </group>
 
             <group position={[destroyedPlanetX, destroyedPlanetY, destroyedPlanetZ]}>

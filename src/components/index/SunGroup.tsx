@@ -6,10 +6,19 @@ import {useCursor} from "@react-three/drei";
 import {HoverRing} from "../HoverRing.tsx";
 import {LabelGroup} from "../LabelGroup.tsx";
 
-export default function SunGroup(){
+const url = "https://docs.google.com/document/d/1aRAI3thIlpdJlXqOyzp41LANNzH5nz7OcpcrcVGc3ro/edit?usp=sharing"
+export default function SunGroup({ isMobile } : { isMobile : boolean }) {
     const [hover, setHover] = useState(false);
     const meshRef = useRef<Mesh>(null!)
-    const url = "https://docs.google.com/document/d/1aRAI3thIlpdJlXqOyzp41LANNzH5nz7OcpcrcVGc3ro/edit?usp=sharing"
+    const linePoints = isMobile ? [
+        new Vector3(0, 0, 0),
+        new Vector3(-.8, 0, 0),
+        new Vector3(-.8, 0, 0)
+    ] : [
+        new Vector3(0, 0, 0),
+        new Vector3(0, -1.2, 0),
+        new Vector3(0.5, -1.2, 0)
+    ];
 
     useFrame((_state, delta) => {
         if (meshRef.current) {
@@ -46,13 +55,9 @@ export default function SunGroup(){
                     hover={hover}
                     setHover={setHover}
                     handleClick={handleClick}
-                    linePoints={[
-                        new Vector3(0, 0, 0),
-                        new Vector3(0, -1.2, 0),
-                        new Vector3(0.5, -1.2, 0)
-                    ]}
-                    htmlPos={new Vector3(0.5, -1, 0)}
+                    linePoints={linePoints}
                     text={"[ RESUME ]"}
+                    align={isMobile ? "left" : "right"}
                 />
             </group>
         </>
