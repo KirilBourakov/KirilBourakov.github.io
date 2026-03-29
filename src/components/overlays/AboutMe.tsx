@@ -23,8 +23,11 @@ export default function AboutMe() {
 
     return (
         <div
-            className="absolute top-0 right-0 bg-black/40 backdrop-blur-md text-white p-4 pt-2 border-l-2 border-orange-500/50 w-full sm:w-2/3 md:w-1/2 lg:w-1/4 transition-all duration-500"
-            style={{clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 8% 100%)'}}
+            className={
+            "absolute top-0 right-0 bg-black/40 backdrop-blur-md text-white p-4 pt-2 border-l-2 border-orange-500/50 " +
+                "w-full sm:w-2/3 md:w-1/2 lg:w-1/4 transition-all duration-500 " +
+                "lg:[clip-path:polygon(0%_0%,100%_0%,_100%_100%,8%_100%)] [clip-path:polygon(0%_0%,100%_0%,_100%_100%,4%_100%)]"
+            }
         >
             <div className="ml-6 flex flex-col gap-3">
                 <div className="border-b border-orange-500/20 pb-1 mb-1">
