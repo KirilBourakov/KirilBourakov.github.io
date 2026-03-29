@@ -1,15 +1,16 @@
 import {useFrame} from "@react-three/fiber";
 import {type Mesh, Vector3} from "three";
-import {useRef, useState} from "react";
+import {type RefObject, useRef, useState} from "react";
 import Sun from "../models/Sun.tsx";
-import {useCursor} from "@react-three/drei";
+import {type CameraControls, useCursor} from "@react-three/drei";
 import {HoverRing} from "../HoverRing.tsx";
 import {LabelGroup} from "../LabelGroup.tsx";
 import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
 
-const url = "https://docs.google.com/document/d/1aRAI3thIlpdJlXqOyzp41LANNzH5nz7OcpcrcVGc3ro/edit?usp=sharing"
-export default function SunGroup({ isMobile } : { isMobile : boolean }) {
+export default function SunGroup({ cameraRef, isMobile, sunGroupRef } : { cameraRef: RefObject<CameraControls>, isMobile : boolean, sunGroupRef: RefObject<Mesh> }) {
     const { zoomFocus, setZoomFocus } = useZoom();
+    const isZoomed = zoomFocus === ZoomType.RESUME
+
     const [hover, setHover] = useState(false);
     const meshRef = useRef<Mesh>(null!)
     const linePoints = isMobile ? [
@@ -27,10 +28,21 @@ export default function SunGroup({ isMobile } : { isMobile : boolean }) {
             meshRef.current.rotation.y += delta * 0.1;
         }
     });
-    useCursor(hover);
+    useCursor(hover && !isZoomed);
 
     const handleClick = () => {
-        setZoomFocus(ZoomType.RESUME)
+
+        if (sunGroupRef.current && zoomFocus === ZoomType.NONE) {
+            setZoomFocus(ZoomType.RESUME)
+            console.log(sunGroupRef.current)
+
+            const pos = sunGroupRef.current.position
+            cameraRef.current.setLookAt(
+                pos.x, pos.y, pos.z + 1, // New Camera Position
+                pos.x + 1, pos.y, pos.z,     // New Target Position
+                true                              // Smooth Transition
+            )
+        }
     }
 
     return (
@@ -38,29 +50,33 @@ export default function SunGroup({ isMobile } : { isMobile : boolean }) {
             <group>
                 <group>
                     <Sun
-                        scale={hover ? .3 : .25}
+                        scale={hover && !isZoomed ? .3 : .25}
                         ref={meshRef}
                         onPointerOver={() => setHover(true)}
                         onPointerOut={() => setHover(false)}
                         onClick={() => handleClick()}
                     />
 
-                    <HoverRing
-                        hover={hover}
-                        innerRadius={0.7}
-                        outerRadius={0.8}
-                        position={new Vector3(0,0,0)}
-                    />
+                    {!isZoomed &&
+                        <HoverRing
+                            hover={hover}
+                            innerRadius={0.7}
+                            outerRadius={0.8}
+                            position={new Vector3(0,0,0)}
+                        />
+                    }
                 </group>
 
-                <LabelGroup
-                    hover={hover}
-                    setHover={setHover}
-                    handleClick={handleClick}
-                    linePoints={linePoints}
-                    text={"[ RESUME ]"}
-                    align={isMobile ? "left" : "right"}
-                />
+                {!isZoomed &&
+                    <LabelGroup
+                        hover={hover}
+                        setHover={setHover}
+                        handleClick={handleClick}
+                        linePoints={linePoints}
+                        text={"[ RESUME ]"}
+                        align={isMobile ? "left" : "right"}
+                    />
+                }
             </group>
         </>
     )

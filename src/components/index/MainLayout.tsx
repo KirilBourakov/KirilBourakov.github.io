@@ -3,7 +3,8 @@ import DestroyedPlanetGroup from "./DestroyedPlanetGroup.tsx";
 import SunGroup from "./SunGroup.tsx";
 import ShipGroup from "./ShipGroup.tsx";
 import {CameraControls} from "@react-three/drei";
-import {type RefObject} from "react";
+import {type RefObject, useRef} from "react";
+import type {Mesh} from "three";
 
 const BREAKPOINT = 1400;
 
@@ -13,6 +14,7 @@ export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraCon
 
     const sunGroupX = isMobile ? .5 : -viewport.width / 2 + 3;
     const sunGroupY = isMobile ? viewport.height / 2 - 2.3 : viewport.height / 2 - 1.5;
+    const sunGroupRef = useRef<Mesh>(null!)
 
     const shipX = isMobile ? -.5 : -viewport.width / 2 + 3;
     const shipY = isMobile ? -0.5 : -viewport.height / 2 + 1.5;
@@ -23,8 +25,8 @@ export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraCon
 
     return (
         <group>
-            <group position={[sunGroupX, sunGroupY, 0]}>
-                <SunGroup isMobile={isMobile} />
+            <group position={[sunGroupX, sunGroupY, 0]} ref={sunGroupRef}>
+                <SunGroup cameraRef={cameraRef} isMobile={isMobile} sunGroupRef={sunGroupRef} />
             </group>
 
             <group position={[shipX, shipY, 5]}>

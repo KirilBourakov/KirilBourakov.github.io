@@ -48,7 +48,7 @@ export default function ShipGroup({ cameraRef, isMobile }: {cameraRef: RefObject
         <group position={[0, 2, -10]}  >
             <group>
                 <Ship
-                    scale={hover && !isZoomed ? .95 : .9}
+                    scale={hover && !isZoomed ? .80 : .75}
                     rotation={[Math.PI, .4, 0]}
                     onPointerOver={() => setHover(true)}
                     onPointerOut={() => setHover(false)}
