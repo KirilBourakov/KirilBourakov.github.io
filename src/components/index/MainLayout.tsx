@@ -16,8 +16,8 @@ export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraCon
     const sunGroupY = isMobile ? viewport.height / 2 - 2.3 : viewport.height / 2 - 1.5;
     const sunGroupRef = useRef<Mesh>(null!)
 
-    const shipX = isMobile ? -.5 : -viewport.width / 2 + 3;
-    const shipY = isMobile ? -0.5 : -viewport.height / 2 + 1.5;
+    const shipX = isMobile ? -.5 : -viewport.width / 2 + 6;
+    const shipY = isMobile ? -3 : -viewport.height / 2 + 1.5;
 
     const destroyedPlanetY = isMobile ? -viewport.height / 2 - 1 : -viewport.height / 2 + 3;
     const destroyedPlanetX = isMobile ? 4 : (viewport.width / 2 - 4);

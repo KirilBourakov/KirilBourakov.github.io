@@ -10,13 +10,13 @@ export default function ShipGroup({ cameraRef, isMobile }: {cameraRef: RefObject
     const [hover, setHover] = useState(false);
 
     const linePoints = isMobile ? [
-        new Vector3(0, -.5, 0),
-        new Vector3(0, -2.2, 0),
-        new Vector3(-0.5, -2.2, 0)
+        new Vector3(0, -.25, 0),
+        new Vector3(0, -1.1, 0),
+        new Vector3(-0.25, -1.1, 0)
     ] : [
-        new Vector3(0, -.5, 0),
-        new Vector3(0, -4.4, 0),
-        new Vector3(-0.5, -4.4, 0)
+        new Vector3(0, -.25, 0),
+        new Vector3(0, -2.2, 0),
+        new Vector3(-0.25, -2.2, 0)
     ];
 
     // zoom state
@@ -45,10 +45,10 @@ export default function ShipGroup({ cameraRef, isMobile }: {cameraRef: RefObject
     }
 
     return (
-        <group position={[0, 2, -10]}  >
+        <group position={[0, 2, -5]}  >
             <group>
                 <Ship
-                    scale={hover && !isZoomed ? .80 : .75}
+                    scale={hover && !isZoomed ? .45 : .40}
                     rotation={[Math.PI, .4, 0]}
                     onPointerOver={() => setHover(true)}
                     onPointerOut={() => setHover(false)}
@@ -59,9 +59,9 @@ export default function ShipGroup({ cameraRef, isMobile }: {cameraRef: RefObject
                 {!isZoomed &&
                     <HoverRing
                         hover={hover}
-                        innerRadius={2.8}
-                        outerRadius={3.1}
-                        position={new Vector3(.5,-.7,0)}
+                        innerRadius={1.4}
+                        outerRadius={1.55}
+                        position={new Vector3(.25,-.35,0)}
                     />
                 }
             </group>
