@@ -9,7 +9,7 @@ import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
 
 export default function SunGroup({ cameraRef, isMobile, sunGroupRef } : { cameraRef: RefObject<CameraControls>, isMobile : boolean, sunGroupRef: RefObject<Mesh> }) {
     const { zoomFocus, setZoomFocus } = useZoom();
-    const isZoomed = zoomFocus === ZoomType.RESUME
+    const isNotZoomed = zoomFocus === ZoomType.NONE
 
     const [hover, setHover] = useState(false);
     const meshRef = useRef<Mesh>(null!)
@@ -28,10 +28,9 @@ export default function SunGroup({ cameraRef, isMobile, sunGroupRef } : { camera
             meshRef.current.rotation.y += delta * 0.1;
         }
     });
-    useCursor(hover && !isZoomed);
+    useCursor(hover && isNotZoomed);
 
     const handleClick = () => {
-
         if (sunGroupRef.current && zoomFocus === ZoomType.NONE) {
             setZoomFocus(ZoomType.RESUME)
             const pos = sunGroupRef.current.position
@@ -48,14 +47,14 @@ export default function SunGroup({ cameraRef, isMobile, sunGroupRef } : { camera
             <group>
                 <group>
                     <Sun
-                        scale={hover && !isZoomed ? .3 : .25}
+                        scale={hover && isNotZoomed ? .3 : .25}
                         ref={meshRef}
                         onPointerOver={() => setHover(true)}
                         onPointerOut={() => setHover(false)}
                         onClick={() => handleClick()}
                     />
 
-                    {!isZoomed &&
+                    {isNotZoomed &&
                         <HoverRing
                             hover={hover}
                             innerRadius={0.7}
@@ -65,7 +64,7 @@ export default function SunGroup({ cameraRef, isMobile, sunGroupRef } : { camera
                     }
                 </group>
 
-                {!isZoomed &&
+                {isNotZoomed &&
                     <LabelGroup
                         hover={hover}
                         setHover={setHover}

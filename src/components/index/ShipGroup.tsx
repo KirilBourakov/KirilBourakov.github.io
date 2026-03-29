@@ -21,14 +21,14 @@ export default function ShipGroup({ cameraRef, isMobile, shipGroupRef }: {camera
 
     // zoom state
     const { zoomFocus, setZoomFocus } = useZoom();
-    const isZoomed = zoomFocus === ZoomType.PROJECTS
+    const isNotZoomed = zoomFocus === ZoomType.NONE
 
     // meshes
     const meshRef = useRef<Mesh>(null!)
-    useCursor(hover && !isZoomed)
+    useCursor(hover && isNotZoomed)
 
     function zoom() {
-        if (meshRef.current && zoomFocus === ZoomType.NONE) {
+        if (meshRef.current && isNotZoomed) {
             setZoomFocus(ZoomType.PROJECTS)
             const pos = shipGroupRef.current.position
 
@@ -52,7 +52,7 @@ export default function ShipGroup({ cameraRef, isMobile, shipGroupRef }: {camera
         <group position={[0, 2, -5]}  >
             <group>
                 <Ship
-                    scale={hover && !isZoomed ? .45 : .40}
+                    scale={hover && isNotZoomed ? .45 : .40}
                     rotation={[Math.PI, .4, 0]}
                     onPointerOver={() => setHover(true)}
                     onPointerOut={() => setHover(false)}
@@ -60,7 +60,7 @@ export default function ShipGroup({ cameraRef, isMobile, shipGroupRef }: {camera
                     ref={meshRef}
                 />
 
-                {!isZoomed &&
+                {isNotZoomed &&
                     <HoverRing
                         hover={hover}
                         innerRadius={1.4}
@@ -70,7 +70,7 @@ export default function ShipGroup({ cameraRef, isMobile, shipGroupRef }: {camera
                 }
             </group>
 
-            {!isZoomed &&
+            {isNotZoomed &&
                 <LabelGroup
                     hover={hover}
                     setHover={setHover}
