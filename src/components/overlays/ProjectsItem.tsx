@@ -25,14 +25,14 @@ export default function ProjectsItem({reversed, data}: { reversed: boolean, data
 
 function Text({data, fullWidth}: {data: DataType, fullWidth: boolean}) {
     return (
-        <div className={`${fullWidth ? 'flex-1' : 'flex-2'} text-white bg-orange-400 p-4 shadow-md`}>
+        <div className={`${fullWidth ? 'flex-1' : 'flex-2'} text-white bg-black/50 p-4 shadow-md`}>
             <div className={"flex pb-2 justify-between items-baseline"}>
                 <h2 className={"text-2xl font-bold"}>{data.title}</h2>
-                <span className="text-orange-100 font-mono text-sm">
+                <span className="text-orange-400 font-mono text-sm">
                     {data.start === data.end ? data.start : `${data.start} - ${data.end}`}
                 </span>
             </div>
-            <hr className="w-full border-white/30 mb-3" />
+            <hr className="w-full border-orange-400 mb-3" />
 
             <div className="text-sm leading-relaxed">
                 <p className="mb-3">

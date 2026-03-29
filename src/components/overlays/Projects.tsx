@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import ProjectsItem from '../overlays/ProjectsItem.tsx';
 import data from './projects.json'
+import {FaArrowDown, FaArrowUp} from "react-icons/fa";
 
 export default function Projects({ unzoom } : {unzoom: () => void}) {
     const ALL = 'all'
@@ -36,19 +37,19 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
         });
 
     return (
-        <div className={`absolute right-0 top-0 w-screen h-screen lg:w-2/3 bg-black/80 backdrop-blur-md overflow-y-scroll transition-all duration-500 ease-in-out ${visible ? 'opacity-100' : 'opacity-0'}`}>
-            <div className="flex m-1 mr-2 top-0 z-20 bg-black/20 backdrop-blur-sm">
+        <div className={`absolute right-0 top-0 w-screen h-screen lg:w-2/3 bg-black/30 backdrop-blur-md overflow-y-scroll transition-all duration-500 ease-in-out ${visible ? 'opacity-100' : 'opacity-0'}`}>
+            <div className="flex m-1 mr-2 top-0 z-20 bg-transparent ">
 
                 <button
                     onClick={zoomOut}
-                    className={" bg-orange-500 basis-2/12 -mr-4 text-white hover:bg-orange-700 hover:cursor-pointer transition-all duration-500"}
+                    className={"bg-black/50 border-orange-500 basis-2/12 -mr-4 text-white hover:bg-orange-700 hover:cursor-pointer transition-all duration-500"}
                     style={{ clipPath: 'polygon(0% 0%, 85% 0%, 100% 100%, 15% 100%)' }}
                 >
                     Back
                 </button>
 
                 <div
-                    className={"bg-orange-400 basis-full flex p-1 select-none"}
+                    className={"bg-black/50 basis-full flex p-1 select-none"}
                     style={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 2.5% 100%)' }}
                 >
                     <h1 className="text-3xl m-auto text-white">Projects</h1>
@@ -57,13 +58,13 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
             </div>
 
             <div className="flex flex-col lg:flex-row ml-[2.4%] mb-3 gap-2 mr-2">
-                <div className="flex flex-1 bg-orange-400">
+                <div className="flex flex-5 bg-black/50">
                     {[...tags].map((tag, index) => (
                         <button
                             key={`tag-${index}`}
                             className={
                                 `p-3 text-white hover:cursor-pointer transition-all duration-250 font-bold 
-                                ${tag === focus ? "bg-orange-700 shadow-inner" : "hover:bg-orange-500 hover:scale-110"}`
+                                ${tag === focus ? "border-2 border-orange-700 shadow-inner" : "border-orange-500 hover:border-2 hover:scale-110"}`
                             }
                             onClick={() => setFocus(tag)}
                         >
@@ -71,12 +72,23 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
                         </button>
                     ))}
                 </div>
-                <div className="flex bg-orange-400">
+                <div className="flex flex-1 bg-black/50">
                     <button
-                        className="p-3 text-white hover:cursor-pointer transition-all duration-250 font-bold hover:bg-orange-500 w-full lg:w-32"
+                        className="p-3 text-white hover:cursor-pointer transition-all duration-250 font-bold border-orange-500 hover:border-2 w-full"
                         onClick={() => setSortOrder(prev => prev === 'newest' ? 'oldest' : 'newest')}
                     >
-                        {sortOrder === 'newest' ? 'Sort: Newest' : 'Sort: Oldest'}
+                        {sortOrder === 'newest' ?
+                            <div className="flex justify-center align-center">
+                                <div className="my-auto mx-1"><FaArrowDown /></div>
+                                <p>Sort: Newest</p>
+                            </div>
+
+                        :
+                            <div className="flex justify-center align-center">
+                                <div className="my-auto mx-1"><FaArrowUp /></div>
+                                <p>Sort: Oldest</p>
+                            </div>
+                        }
                     </button>
                 </div>
             </div>

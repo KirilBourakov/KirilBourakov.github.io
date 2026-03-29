@@ -25,7 +25,7 @@ export default function AboutMe() {
         <>
             <div
                 className="text-xl absolute top-0 right-0 bg-black/30 text-white p-2 pb-3 w-3/4 md:w-1/2 lg:w-1/4"
-                style={{ clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 5% 100%)' }}
+                style={{clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 5% 100%)'}}
             >
                 <div className="ml-6">
                     <h1 className="font-bold">Kiril Bourakov</h1>
@@ -38,28 +38,28 @@ export default function AboutMe() {
                                 onClick={handleCopy}
                             >
                                 {isCopied ? (
-                                    <MdCheck className="text-lg text-green-700" />
+                                    <MdCheck className="text-lg text-green-700"/>
                                 ) : (
-                                    <MdContentCopy className="text-lg" />
+                                    <MdContentCopy className="text-lg"/>
                                 )}
                             </button>
                         </div>
                     </div>
                     <h2 className="px-1">Phone: (506) 997-0081</h2>
 
-                    <IconContext.Provider value={{ size: "20" }}>
+                    <IconContext.Provider value={{size: "20"}}>
                         <div className="flex">
                             <div
                                 className="ml-auto hover:cursor-pointer transition-all hover:scale-110"
                                 onClick={() => window.open(githubUrl, '_blank')}
                             >
-                                <FaGithub scale={5} />
+                                <FaGithub scale={5}/>
                             </div>
                             <div
                                 className="mr-3 hover:cursor-pointer transition-all hover:scale-110"
                                 onClick={() => window.open(linkedinUrl, '_blank')}
                             >
-                                <FaLinkedin scale={5} />
+                                <FaLinkedin scale={5}/>
                             </div>
                         </div>
                     </IconContext.Provider>
