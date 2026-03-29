@@ -8,7 +8,9 @@ Source: https://sketchfab.com/3d-models/planet-0104234961624b7aa0cb85d03161babe
 Title: Planet
 */
 
-import React, {useRef} from 'react'
+// @ts-nocheck
+
+import {useRef} from 'react'
 import { useGLTF } from '@react-three/drei'
 import {Mesh} from "three";
 import {useFrame} from "@react-three/fiber";
@@ -22,7 +24,8 @@ export function DestroyedPlanet(props) {
             meshRef.current.rotation.z += delta * 0.01;
         }
     });
-  return (
+
+    return (
     <group {...props} dispose={null} ref={meshRef}>
       <mesh
           geometry={nodes.COMBINE_LP_LAM_0.geometry}

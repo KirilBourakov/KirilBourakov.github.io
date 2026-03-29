@@ -5,7 +5,7 @@ interface DataType{
         type: string
         main: string
         points: string[]
-        icons: {
+        icons?: {
             img: string
             alt: string
         }[] | null

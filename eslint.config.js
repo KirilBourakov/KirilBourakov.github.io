@@ -19,5 +19,15 @@ export default defineConfig([
       ecmaVersion: 2020,
       globals: globals.browser,
     },
+    rules: {
+      '@typescript-eslint/ban-ts-comment': [
+        'error',
+        {
+          'ts-nocheck': false, // This allows the use of @ts-nocheck
+          'ts-ignore': 'allow-with-description',
+          'ts-expect-error': 'allow-with-description',
+        },
+      ],
+    },
   },
 ])
