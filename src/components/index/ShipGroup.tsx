@@ -31,11 +31,20 @@ export default function ShipGroup({ cameraRef, isMobile, shipGroupRef }: {camera
         if (meshRef.current && zoomFocus === ZoomType.NONE) {
             setZoomFocus(ZoomType.PROJECTS)
             const pos = shipGroupRef.current.position
-            cameraRef.current.setLookAt(
-                pos.x - 1.5, pos.y - 1, pos.z + 1,
-                pos.x + 1, pos.y, pos.z,
-                true
-            )
+
+            if (isMobile) {
+                cameraRef.current.setLookAt(
+                    pos.x, pos.y, pos.z + .5,
+                    pos.x + .5, pos.y, pos.z,
+                    true
+                )
+            } else {
+                cameraRef.current.setLookAt(
+                    pos.x - 1.5, pos.y - 1, pos.z + 1,
+                    pos.x + 1, pos.y, pos.z,
+                    true
+                )
+            }
         }
     }
 

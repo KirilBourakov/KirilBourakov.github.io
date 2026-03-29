@@ -6,7 +6,7 @@ import {CameraControls} from "@react-three/drei";
 import {type RefObject, useRef} from "react";
 import type {Mesh} from "three";
 
-const BREAKPOINT = 1400;
+const BREAKPOINT = 1650;
 
 export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraControls>}) {
     const { size, viewport } = useThree();
@@ -31,7 +31,7 @@ export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraCon
             </group>
 
             <group position={[shipX, shipY, 5]} ref={shipGroupRef}>
-                <ShipGroup cameraRef={cameraRef} isMobile={isMobile} shipGroupRef={shipGroupRef}/>
+                <ShipGroup cameraRef={cameraRef} isMobile={isMobile} shipGroupRef={shipGroupRef} />
             </group>
 
             <group position={[destroyedPlanetX, destroyedPlanetY, destroyedPlanetZ]}>
