@@ -6,7 +6,7 @@ import {Mesh, Vector3} from "three";
 import {LabelGroup} from "../LabelGroup.tsx";
 import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
 
-export default function ShipGroup({ cameraRef, isMobile }: {cameraRef: RefObject<CameraControls>, isMobile : boolean}) {
+export default function ShipGroup({ cameraRef, isMobile, shipGroupRef }: {cameraRef: RefObject<CameraControls>, isMobile : boolean, shipGroupRef: RefObject<Mesh> }) {
     const [hover, setHover] = useState(false);
 
     const linePoints = isMobile ? [
@@ -30,17 +30,12 @@ export default function ShipGroup({ cameraRef, isMobile }: {cameraRef: RefObject
     function zoom() {
         if (meshRef.current && zoomFocus === ZoomType.NONE) {
             setZoomFocus(ZoomType.PROJECTS)
-            cameraRef.current.fitToBox(
-                meshRef.current,
-                true,
-                {
-                    paddingLeft: -6,
-                    paddingRight: 1.2,
-                    paddingTop: 1.2,
-                    paddingBottom: 1.2
-                }
-            );
-
+            const pos = shipGroupRef.current.position
+            cameraRef.current.setLookAt(
+                pos.x - 1.5, pos.y - 1, pos.z + 1,
+                pos.x + 1, pos.y, pos.z,
+                true
+            )
         }
     }
 

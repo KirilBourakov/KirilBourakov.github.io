@@ -16,8 +16,9 @@ export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraCon
     const sunGroupY = isMobile ? viewport.height / 2 - 2.3 : viewport.height / 2 - 1.5;
     const sunGroupRef = useRef<Mesh>(null!)
 
-    const shipX = isMobile ? -.5 : -viewport.width / 2 + 6;
+    const shipX = isMobile ? -.5 : -viewport.width / 2 + 7;
     const shipY = isMobile ? -3 : -viewport.height / 2 + 1.5;
+    const shipGroupRef = useRef<Mesh>(null!)
 
     const destroyedPlanetY = isMobile ? -viewport.height / 2 - 1 : -viewport.height / 2 + 3;
     const destroyedPlanetX = isMobile ? 4 : (viewport.width / 2 - 4);
@@ -29,8 +30,8 @@ export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraCon
                 <SunGroup cameraRef={cameraRef} isMobile={isMobile} sunGroupRef={sunGroupRef} />
             </group>
 
-            <group position={[shipX, shipY, 5]}>
-                <ShipGroup cameraRef={cameraRef} isMobile={isMobile}/>
+            <group position={[shipX, shipY, 5]} ref={shipGroupRef}>
+                <ShipGroup cameraRef={cameraRef} isMobile={isMobile} shipGroupRef={shipGroupRef}/>
             </group>
 
             <group position={[destroyedPlanetX, destroyedPlanetY, destroyedPlanetZ]}>

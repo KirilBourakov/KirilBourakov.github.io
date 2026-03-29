@@ -34,13 +34,11 @@ export default function SunGroup({ cameraRef, isMobile, sunGroupRef } : { camera
 
         if (sunGroupRef.current && zoomFocus === ZoomType.NONE) {
             setZoomFocus(ZoomType.RESUME)
-            console.log(sunGroupRef.current)
-
             const pos = sunGroupRef.current.position
             cameraRef.current.setLookAt(
-                pos.x, pos.y, pos.z + 1, // New Camera Position
-                pos.x + 1, pos.y, pos.z,     // New Target Position
-                true                              // Smooth Transition
+                pos.x, pos.y, pos.z + 1,
+                pos.x + 1, pos.y, pos.z,
+                true
             )
         }
     }
