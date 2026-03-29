@@ -17,9 +17,7 @@ export default function BackDrop({ children, visible, zoomOut, title }: { childr
             currentRef.addEventListener('scroll', handleScroll);
         }
 
-        const timer = setTimeout(() => setVisible(true), 500);
         return () => {
-            clearTimeout(timer);
             if (currentRef) {
                 currentRef.removeEventListener('scroll', handleScroll);
             }
