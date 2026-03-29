@@ -35,7 +35,7 @@ export default function SunGroup({ cameraRef, isMobile, sunGroupRef } : { camera
             setZoomFocus(ZoomType.RESUME)
             const pos = sunGroupRef.current.position
             cameraRef.current.setLookAt(
-                pos.x, pos.y, pos.z + 1,
+                pos.x + 1, pos.y, pos.z + 1,
                 pos.x + 1, pos.y, pos.z,
                 true
             )
