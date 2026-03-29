@@ -62,10 +62,11 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
             overflow-y-auto overflow-x-hidden transition-all duration-500 ease-in-out ${visible ? 'opacity-100' : 'opacity-0'}`}
         >
             <div
-                className={
-                    `flex sticky top-0 z-20 p-2 transition-colors duration-300 
-                    ${isScrolled ? 'bg-black/20 backdrop-blur-sm' : 'bg-transparent'}`
-                }
+                className={`flex sticky top-0 z-20 transition-all duration-300 ${
+                    isScrolled 
+                        ? 'bg-black/50 backdrop-blur-md p-1' 
+                        : 'bg-transparent p-2'
+                }`}
             >
                 <button
                     onClick={zoomOut}
