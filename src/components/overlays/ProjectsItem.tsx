@@ -69,7 +69,7 @@ function Image({reversed, data}: { reversed: boolean, data: DataType }) {
 
     return (
         <div className={`w-full lg:flex-1 relative overflow-hidden bg-gray-900 h-64 md:h-80 lg:h-auto border-b lg:border-b-0 ${reversed ? 'lg:border-l' : 'lg:border-r'} border-white/10`}>
-            <div className="w-full h-full group">
+            <div className="absolute inset-0 group">
                 <img
                     src={getSrc()}
                     alt={getAlt()}
