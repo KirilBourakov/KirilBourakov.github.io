@@ -25,7 +25,7 @@ export default function ProjectsItem({reversed, data}: { reversed: boolean, data
 
 function Text({data, fullWidth}: {data: DataType, fullWidth: boolean}) {
     return (
-        <div className={`${fullWidth ? 'w-full' : 'lg:flex-[2]'} text-white p-6 flex flex-col`}>
+        <div className={`${fullWidth ? 'w-full' : 'lg:flex-2'} text-white p-6 flex flex-col`}>
             <div className={"flex pb-2 justify-between items-baseline gap-4"}>
                 <h2 className={"text-xl md:text-2xl font-bold tracking-tight"}>{data.title}</h2>
                 <span className="text-orange-400 font-mono text-xs md:text-sm whitespace-nowrap bg-orange-400/10 px-2 py-0.5 rounded border border-orange-400/20">
@@ -73,7 +73,7 @@ function Image({reversed, data}: { reversed: boolean, data: DataType }) {
                 <img
                     src={getSrc()}
                     alt={getAlt()}
-                    className="w-full h-full object-cover object-top transition-all duration-[3000ms] ease-in-out lg:group-hover:object-bottom"
+                    className="w-full h-full object-cover object-top transition-all duration-3000 ease-in-out lg:group-hover:object-bottom"
                 />
             </div>
             {data.icons && data.icons.length > 1 && (
