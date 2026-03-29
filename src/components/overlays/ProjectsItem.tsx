@@ -16,7 +16,7 @@ interface DataType{
 export default function ProjectsItem({reversed, data}: { reversed: boolean, data: DataType }) {
     const hasIcons = data.icons && data.icons.length > 0;
     return (
-        <div className={`flex mb-4 mx-2 ${reversed ? 'flex-row-reverse' : 'flex-row'}`}>
+        <div className={`flex flex-col ${reversed ? 'lg:flex-row-reverse' : 'lg:flex-row'} mb-8 bg-black/40 border border-white/5 shadow-2xl overflow-hidden`}>
             {hasIcons && <Image reversed={reversed} data={data} />}
             <Text data={data} fullWidth={!hasIcons}/>
         </div>
@@ -25,22 +25,22 @@ export default function ProjectsItem({reversed, data}: { reversed: boolean, data
 
 function Text({data, fullWidth}: {data: DataType, fullWidth: boolean}) {
     return (
-        <div className={`${fullWidth ? 'flex-1' : 'flex-2'} text-white bg-black/50 p-4 shadow-md`}>
-            <div className={"flex pb-2 justify-between items-baseline"}>
-                <h2 className={"text-2xl font-bold"}>{data.title}</h2>
-                <span className="text-orange-400 font-mono text-sm">
+        <div className={`${fullWidth ? 'w-full' : 'lg:flex-[2]'} text-white p-6 flex flex-col`}>
+            <div className={"flex pb-2 justify-between items-baseline gap-4"}>
+                <h2 className={"text-xl md:text-2xl font-bold tracking-tight"}>{data.title}</h2>
+                <span className="text-orange-400 font-mono text-xs md:text-sm whitespace-nowrap bg-orange-400/10 px-2 py-0.5 rounded border border-orange-400/20">
                     {data.start === data.end ? data.start : `${data.start} - ${data.end}`}
                 </span>
             </div>
-            <hr className="w-full border-orange-400 mb-3" />
+            <hr className="w-full border-orange-500/30 mb-4" />
 
-            <div className="text-sm leading-relaxed">
-                <p className="mb-3">
+            <div className="text-sm md:text-base leading-relaxed text-gray-300">
+                <p className="mb-4">
                     {data.main}
                 </p>
-                <ul className={"list-disc ml-5 space-y-1"}>
+                <ul className={"list-disc ml-5 space-y-2 marker:text-orange-500"}>
                     {data.points.map((point, index) => (
-                        <li key={index}>{point}</li>
+                        <li key={index} className="pl-1">{point}</li>
                     ))}
                 </ul>
             </div>
@@ -68,12 +68,12 @@ function Image({reversed, data}: { reversed: boolean, data: DataType }) {
     }
 
     return (
-        <div className={`flex-1 ${reversed ? 'ml-2' : 'mr-2'} relative overflow-hidden shadow-lg bg-gray-900 h-64 rounded-sm border border-white/10`}>
+        <div className={`w-full lg:flex-1 relative overflow-hidden bg-gray-900 h-64 md:h-80 lg:h-auto border-b lg:border-b-0 ${reversed ? 'lg:border-l' : 'lg:border-r'} border-white/10`}>
             <div className="w-full h-full group">
                 <img
                     src={getSrc()}
                     alt={getAlt()}
-                    className="w-full h-full object-cover object-top transition-all duration-3000 ease-in-out group-hover:object-bottom"
+                    className="w-full h-full object-cover object-top transition-all duration-[3000ms] ease-in-out lg:group-hover:object-bottom"
                 />
             </div>
             {data.icons && data.icons.length > 1 && (
