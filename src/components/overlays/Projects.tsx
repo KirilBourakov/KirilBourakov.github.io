@@ -1,13 +1,12 @@
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useState} from 'react';
 import ProjectsItem from '../overlays/ProjectsItem.tsx';
 import data from './projects.json'
 import {FaArrowDown, FaArrowUp} from "react-icons/fa";
+import BackDrop from "./BackDrop.tsx";
 
 export default function Projects({ unzoom } : {unzoom: () => void}) {
     const ALL = 'all'
 
-    const [isScrolled, setIsScrolled] = useState(false);
-    const scrollRef = useRef<HTMLDivElement>(null)
     const [visible, setVisible] = useState(false);
     const [focus, setFocus] = useState<string | null>(ALL);
     const [sortOrder, setSortOrder] = useState<'newest' | 'oldest'>('newest');
@@ -20,23 +19,9 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
     })
 
     useEffect(() => {
-        const handleScroll = () => {
-            if (scrollRef.current) {
-                setIsScrolled(scrollRef.current.scrollTop > 20);
-            }
-        };
-
-        const currentRef = scrollRef.current;
-        if (currentRef) {
-            currentRef.addEventListener('scroll', handleScroll);
-        }
-
         const timer = setTimeout(() => setVisible(true), 500);
         return () => {
             clearTimeout(timer);
-            if (currentRef) {
-                currentRef.removeEventListener('scroll', handleScroll);
-            }
         };
     }, []);
 
@@ -56,35 +41,7 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
         });
 
     return (
-        <div
-            ref={scrollRef}
-            className={`absolute right-0 top-0 w-full h-full lg:w-2/3 bg-black/30 backdrop-blur-md 
-            overflow-y-auto overflow-x-hidden transition-all duration-500 ease-in-out ${visible ? 'opacity-100' : 'opacity-0'}`}
-        >
-            <div
-                className={`flex sticky top-0 z-20 transition-all duration-300 ${
-                    isScrolled 
-                        ? 'bg-black/50 backdrop-blur-md p-1' 
-                        : 'bg-transparent p-2'
-                }`}
-            >
-                <button
-                    onClick={zoomOut}
-                    className={
-                        "bg-black/50 border-orange-500 border-e-2 px-12 py-2 text-white hover:bg-orange-700 hover:cursor-pointer transition-all duration-500" +
-                        "sm:-mr-[64px] sm:border-e-0 sm:[clip-path:polygon(0%_0%,_calc(100%-32px)_0%,_100%_100%,_32px_100%)] "
-                    }
-                >
-                    Back
-                </button>
-
-                <div
-                    className={"bg-black/50 flex-1 flex p-1 select-none sm:[clip-path:polygon(0%_0%,_100%_0%,_100%_100%,_32px_100%)]"}
-                >
-                    <h1 className="text-2xl md:text-3xl m-auto text-white font-mono uppercase tracking-widest">Projects</h1>
-                </div>
-            </div>
-
+        <BackDrop visible={visible} zoomOut={zoomOut} title={"Projects"}>
             <div className="flex flex-col lg:flex-row px-4 mt-4 mb-6 gap-3">
                 <div className="flex flex-wrap flex-1 bg-black/30 border border-white/10 p-1">
                     {[...tags].map((tag, index) => (
@@ -135,6 +92,6 @@ export default function Projects({ unzoom } : {unzoom: () => void}) {
                     </div>
                 ))}
             </div>
-        </div>
+        </BackDrop>
     )
 }

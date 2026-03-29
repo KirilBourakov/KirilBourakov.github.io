@@ -3,6 +3,7 @@ import React, {createContext, useContext, useMemo, useState} from "react";
 export const ZoomType = {
     NONE: "NONE",
     PROJECTS: "PROJECTS",
+    RESUME: "RESUME",
 } as const;
 export type ZoomType = (typeof ZoomType)[keyof typeof ZoomType];
 
