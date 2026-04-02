@@ -5,6 +5,7 @@ import ShipGroup from "./ShipGroup.tsx";
 import {CameraControls} from "@react-three/drei";
 import {type RefObject, useRef} from "react";
 import type {Mesh} from "three";
+import {Station} from "../models/Station.tsx";
 
 const BREAKPOINT = 1650;
 
@@ -33,6 +34,8 @@ export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraCon
             <group position={[shipX, shipY, 5]} ref={shipGroupRef}>
                 <ShipGroup cameraRef={cameraRef} isMobile={isMobile} shipGroupRef={shipGroupRef} />
             </group>
+
+            <Station />
 
             <group position={[destroyedPlanetX, destroyedPlanetY, destroyedPlanetZ]}>
                 <DestroyedPlanetGroup />
