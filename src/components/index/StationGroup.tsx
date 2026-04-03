@@ -19,7 +19,7 @@ export default function StationGroup({ cameraRef, isMobile, stationGroupRef } : 
     ] : [
         new Vector3(0, 0, 0),
         new Vector3(0, -1.7, 0),
-        new Vector3(-.7, -1.7, 0)
+        new Vector3(.7, -1.7, 0)
     ];
 
     useCursor(hover && isNotZoomed);
@@ -62,7 +62,7 @@ export default function StationGroup({ cameraRef, isMobile, stationGroupRef } : 
                     handleClick={handleClick}
                     linePoints={linePoints}
                     text={"[ WORK HISTORY ]"}
-                    align={isMobile ? "left" : "left"}
+                    align={isMobile ? "left" : "right"}
                 />
             }
         </group>

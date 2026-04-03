@@ -3,47 +3,87 @@ import DestroyedPlanetGroup from "./DestroyedPlanetGroup.tsx";
 import SunGroup from "./SunGroup.tsx";
 import ShipGroup from "./ShipGroup.tsx";
 import {CameraControls} from "@react-three/drei";
-import {type RefObject, useRef} from "react";
+import {type RefObject, useMemo, useRef} from "react";
 import type {Mesh} from "three";
 import StationGroup from "./StationGroup.tsx";
 
-const BREAKPOINT = 1650;
+const BREAKPOINTS = {
+    md: 768,
+    lg: 1650
+}
+
+class SceneLayout {
+    tier: string;
+    width: number;
+    height: number;
+
+    constructor(width: number, viewportWidth: number, viewportHeight: number) {
+        this.width = viewportWidth;
+        this.height = viewportHeight;
+        this.tier = this.getScreenType(width);
+    }
+
+    private getScreenType(width: number): string {
+        if (width < BREAKPOINTS.md) return 'small';
+        if (width < BREAKPOINTS.lg) return 'medium';
+        return 'large';
+    }
+
+    get isMobile() : boolean {
+        return this.tier == 'small';
+    }
+
+    get sunPos(): [number, number, number] {
+        if (this.tier === 'small') return [0.5, this.height / 2 - 2.3, 0];
+        if (this.tier === 'medium') return [-2.5, this.height / 2 - 2.3, 1];
+        return [-this.width / 2 + 3, this.height / 2 - 1.5, 0];
+    }
+
+    get shipPos(): [number, number, number] {
+        if (this.tier === 'small') return [-0.5, -3, 5];
+        if (this.tier === 'medium') return [-0.2, -3, 5];
+        return [-this.width / 2 + 7, -this.height / 2 + 1.5, 5];
+    }
+
+    get stationPos(): [number, number, number] {
+        if (this.tier === 'small') return [1.5, this.height / 2 - 4, -2];
+        if (this.tier === 'medium') return [-3, this.height / 2 - 5, 0];
+        return [this.width / 2 - 14, this.height / 2 - 5, -2];
+    }
+
+    get planetPos(): [number, number, number] {
+        if (this.tier === 'small') return [4, -this.height / 2 - 1, -5];
+        if (this.tier === 'medium') return [4, -this.height / 2 + 2.5, 0];
+        return [this.width / 2 - 4, -this.height / 2 + 3, 0];
+    }
+}
 
 export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraControls>}) {
     const { size, viewport } = useThree();
-    const isMobile = size.width < BREAKPOINT;
 
-    const sunGroupX = isMobile ? .5 : -viewport.width / 2 + 3;
-    const sunGroupY = isMobile ? viewport.height / 2 - 2.3 : viewport.height / 2 - 1.5;
+    const layout = useMemo(() =>
+            new SceneLayout(size.width, viewport.width, viewport.height),
+        [size.width, viewport.width, viewport.height]);
+
     const sunGroupRef = useRef<Mesh>(null!)
-
-    const shipX = isMobile ? -.5 : -viewport.width / 2 + 7;
-    const shipY = isMobile ? -3 : -viewport.height / 2 + 1.5;
     const shipGroupRef = useRef<Mesh>(null!)
-
-    const stationX = isMobile ? 1.5 : viewport.width / 2 - 14;
-    const stationY = isMobile ? viewport.height / 2 - 4 : viewport.height / 2 - 6;
     const stationGroupRef = useRef<Mesh>(null!)
-
-    const destroyedPlanetY = isMobile ? -viewport.height / 2 - 1 : -viewport.height / 2 + 3;
-    const destroyedPlanetX = isMobile ? 4 : (viewport.width / 2 - 4);
-    const destroyedPlanetZ = isMobile ? -5 : 0;
 
     return (
         <group>
-            <group position={[sunGroupX, sunGroupY, 0]} ref={sunGroupRef}>
-                <SunGroup cameraRef={cameraRef} isMobile={isMobile} sunGroupRef={sunGroupRef} />
+            <group position={layout.sunPos} ref={sunGroupRef}>
+                <SunGroup cameraRef={cameraRef} isMobile={layout.isMobile} sunGroupRef={sunGroupRef} />
             </group>
 
-            <group position={[shipX, shipY, 5]} ref={shipGroupRef}>
-                <ShipGroup cameraRef={cameraRef} isMobile={isMobile} shipGroupRef={shipGroupRef} />
+            <group position={layout.shipPos} ref={shipGroupRef}>
+                <ShipGroup cameraRef={cameraRef} isMobile={layout.isMobile} shipGroupRef={shipGroupRef} />
             </group>
 
-            <group position={[stationX, stationY, -2]} ref={stationGroupRef}>
-                <StationGroup cameraRef={cameraRef} isMobile={isMobile} stationGroupRef={stationGroupRef} />
+            <group position={layout.stationPos} ref={stationGroupRef}>
+                <StationGroup cameraRef={cameraRef} isMobile={layout.isMobile} stationGroupRef={stationGroupRef} />
             </group>
 
-            <group position={[destroyedPlanetX, destroyedPlanetY, destroyedPlanetZ]}>
+            <group position={layout.planetPos}>
                 <DestroyedPlanetGroup />
             </group>
         </group>
