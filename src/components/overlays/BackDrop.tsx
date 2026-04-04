@@ -1,6 +1,14 @@
 import {type ReactNode, useEffect, useRef, useState} from "react";
 
-export default function BackDrop({ children, visible, zoomOut, title }: { children: ReactNode, visible: boolean, zoomOut: () => void, title: string }) {
+interface Props {
+    children: ReactNode
+    visible: boolean
+    zoomOut: () => void
+    title: string
+    flip?: boolean
+}
+
+export default function BackDrop({ children, visible, zoomOut, title, flip=false }: Props ) {
     const [isScrolled, setIsScrolled] = useState(false);
     const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -27,17 +35,19 @@ export default function BackDrop({ children, visible, zoomOut, title }: { childr
     return (
         <div
             ref={scrollRef}
-            className={`absolute right-0 top-0 w-full h-full lg:w-2/3 bg-black/40 backdrop-blur-xl 
+            className={`absolute top-0 w-full h-full lg:w-2/3 bg-black/40 backdrop-blur-xl 
             overflow-y-auto overflow-x-hidden transition-all duration-500 ease-in-out z-50
-            ${visible ? 'opacity-100' : 'opacity-0'}`}
+            ${visible ? 'opacity-100' : 'opacity-0'}
+            ${flip ? 'left-0' : 'right-0'}`
+        }
         >
 
             <div
-                className={`flex sticky top-0 z-20 transition-all duration-300 ${
-                    isScrolled
-                        ? 'bg-black/50 backdrop-blur-md p-1'
-                        : 'bg-transparent p-2'
-                }`}
+                className={
+                    `flex sticky top-0 z-20 transition-all duration-300 
+                    ${isScrolled ? 'bg-black/50 backdrop-blur-md p-1' : 'bg-transparent p-2'}
+                    ${flip ? 'flex-row-reverse' : 'flex-row'}
+                `}
             >
                 <button
                     onClick={zoomOut}
@@ -50,7 +60,10 @@ export default function BackDrop({ children, visible, zoomOut, title }: { childr
                 </button>
 
                 <div
-                    className={"bg-black/50 flex-1 flex p-1 select-none sm:[clip-path:polygon(0%_0%,_100%_0%,_100%_100%,_32px_100%)]"}
+                    className={`
+                        bg-black/50 flex-1 flex p-1 select-none 
+                        ${flip ? 'sm:[clip-path:polygon(0%_0%,_calc(100%_-_32px)_0%,_100%_100%,_0%_100%)]' : 'sm:[clip-path:polygon(0%_0%,_100%_0%,_100%_100%,_32px_100%)]'}
+                    `}
                 >
                     <h1 className="text-2xl md:text-3xl m-auto text-white font-mono uppercase tracking-widest">{title}</h1>
                 </div>

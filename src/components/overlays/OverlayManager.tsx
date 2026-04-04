@@ -4,6 +4,7 @@ import type {CameraControls} from "@react-three/drei";
 import Projects from "../overlays/Projects.tsx";
 import AboutMe from "./AboutMe.tsx";
 import Resume from "./Resume.tsx";
+import Experience from "./Experience.tsx";
 
 
 export default function OverlayManager({cameraRef}: {cameraRef: RefObject<CameraControls>}) {
@@ -21,6 +22,10 @@ export default function OverlayManager({cameraRef}: {cameraRef: RefObject<Camera
 
     if (zoomFocus == ZoomType.RESUME){
         return <Resume unzoom={unzoom}/>
+    }
+
+    if (zoomFocus == ZoomType.EXPERIENCE){
+        return <Experience unzoom={unzoom}/>
     }
 
     return <AboutMe />

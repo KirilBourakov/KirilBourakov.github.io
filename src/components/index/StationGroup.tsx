@@ -26,12 +26,27 @@ export default function StationGroup({ cameraRef, isMobile, stationGroupRef } : 
 
     const handleClick = () => {
         if (stationGroupRef.current && zoomFocus === ZoomType.NONE) {
+            setZoomFocus(ZoomType.EXPERIENCE);
+
+            const prev = cameraRef.current.smoothTime
+            cameraRef.current.smoothTime = .9
+
             const pos = stationGroupRef.current.position
-            cameraRef.current.setLookAt(
-                pos.x, pos.y, pos.z + 5,
-                pos.x, pos.y, pos.z,
-                true
-            )
+            if (isMobile){
+                cameraRef.current.setLookAt(
+                    pos.x, pos.y, pos.z - 5,
+                    pos.x + 1, pos.y, pos.z,
+                    true
+                ).then(() => cameraRef.current.smoothTime = prev)
+            } else {
+                cameraRef.current.setLookAt(
+                    pos.x, pos.y, pos.z - 5,
+                    pos.x + 5, pos.y, pos.z,
+                    true
+                ).then(() => cameraRef.current.smoothTime = prev)
+            }
+
+
         }
     }
 
@@ -61,7 +76,7 @@ export default function StationGroup({ cameraRef, isMobile, stationGroupRef } : 
                     setHover={setHover}
                     handleClick={handleClick}
                     linePoints={linePoints}
-                    text={"[ WORK HISTORY ]"}
+                    text={"[ EXPERIENCE ]"}
                     align={isMobile ? "left" : "right"}
                 />
             }

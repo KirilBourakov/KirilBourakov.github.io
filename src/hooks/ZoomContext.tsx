@@ -4,6 +4,7 @@ export const ZoomType = {
     NONE: "NONE",
     PROJECTS: "PROJECTS",
     RESUME: "RESUME",
+    EXPERIENCE: "EXPERIENCE"
 } as const;
 export type ZoomType = (typeof ZoomType)[keyof typeof ZoomType];
 
