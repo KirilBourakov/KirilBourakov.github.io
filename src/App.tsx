@@ -3,15 +3,18 @@ import {Bloom, EffectComposer} from "@react-three/postprocessing";
 import MainLayout from "./components/index/MainLayout.tsx";
 import {ZoomContextProvider} from "./hooks/ZoomContext.tsx";
 import OverlayManager from "./components/overlays/OverlayManager.tsx";
-import {useRef} from "react";
+import {Suspense, useRef} from "react";
 import {CameraControls, Environment} from "@react-three/drei";
+import LoadingScreen from "./components/index/LoadingScreen.tsx";
 
 export default function App() {
     const cameraRef = useRef<CameraControls>(null!)
 
     return (
         <ZoomContextProvider>
-            <div className="w-screen h-screen m-0 relative overflow-hidden">
+            <div className="w-screen h-screen m-0 relative overflow-hidden bg-black">
+                <LoadingScreen />
+                
                 <div className="absolute right-0 top-0 w-full h-full">
                     <Canvas dpr={[1, 1]}>
                         <Environment
@@ -39,7 +42,9 @@ export default function App() {
                             }}
                         />
 
-                        <MainLayout cameraRef={cameraRef}/>
+                        <Suspense fallback={null}>
+                            <MainLayout cameraRef={cameraRef}/>
+                        </Suspense>
 
                         <ambientLight intensity={2} />
                     </Canvas>
