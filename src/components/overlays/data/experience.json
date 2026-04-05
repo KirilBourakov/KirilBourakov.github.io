@@ -1,31 +1,45 @@
 [
   {
-    "title": "Card title 1",
+    "title": "Junior Software Developer",
     "times": [
       {
-        "start": "2025-04",
-        "end": "2025-05",
+        "start": "April 28, 2025",
+        "end": "December 31, 2025",
         "info": "full-time"
       },
       {
-        "start": "2025-05",
-        "end": "2025-06",
+        "start": "January 1, 2026",
+        "end": "PRESENT",
         "info": "part-time"
       }
     ],
-    "cardSubtitle": "Tech Corp Inc.",
-    "cardDetailedText": "Leading the migration to React 19 and optimizing performance."
+    "cardSubtitle": "SmartSkin",
+    "mainText": "Developed robust AI/ML models for time series data.",
+    "desc": [
+      "Developed models to detect 'markers' (individual important entries) on 400-3000 entry long time series data with 90% accuracy.",
+      "Developed models to accurately align noisy time-series sensor readings temporally for further analysis.",
+      "Developed models to detect and warn when marker placing model failed.",
+      "Architected an end-to-end machine learning service.",
+      "Wrote AWS lambda functions to run and manage models, and terraform to deploy them.",
+      "Helped develop robust model versioning using S3.",
+      "Wrote a genetic algorithm that improved prototype model accuracy by more then 20%.",
+      "Wrote algorithm to detect and fix inaccurate RPM readings from Container Twin sensor."
+    ]
   },
   {
-    "title": "Card title 2",
+    "title": "Seafood Clerk",
     "times": [
       {
-        "start": "2025-04",
-        "end": "2025-05",
-        "info": "full-time"
+        "start": "2021",
+        "end": "2024",
+        "info": "part-time"
       }
     ],
-    "cardSubtitle": "Tech Corp Inc 2.",
-    "cardDetailedText": "Leading the migration to React 19 and optimizing performance."
+    "cardSubtitle": "Sobeys",
+    "mainText": "Worked at Riverview Sobeys part-time",
+    "desc": [
+      "Worked in a team and individually to ensure the department was running properly.",
+      "Monitored product closely and communicated possible issues to supervisor."
+    ]
   }
 ]

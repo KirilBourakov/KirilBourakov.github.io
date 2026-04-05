@@ -12,7 +12,8 @@ interface Items{
     title: string;
     times: Time[];
     cardSubtitle: string;
-    cardDetailedText: string;
+    mainText: string;
+    desc: string[];
 }
 
 export default function Experience({ unzoom }: { unzoom: () => void }) {
@@ -64,7 +65,7 @@ function Card({item} : { item: Items }) {
                         </h3>
                         <div className="flex items-center gap-3">
                             <div className="h-px w-6 bg-orange-500/40 group-hover:w-10 group-hover:bg-orange-500 transition-all duration-500"></div>
-                            <span className="text-orange-500/80 font-bold text-sm uppercase tracking-wide font-mono group-hover:text-orange-400 transition-colors">
+                            <span className="text-orange-500/80 font-bold text-md uppercase tracking-wide font-mono group-hover:text-orange-400 transition-colors">
                                 {item.cardSubtitle}
                             </span>
                         </div>
@@ -77,11 +78,29 @@ function Card({item} : { item: Items }) {
                     </div>
                 </div>
 
-                <div className="relative pt-6 border-t border-white/5">
-                    <p className="text-gray-400 leading-relaxed text-sm md:text-base font-sans opacity-80 group-hover:opacity-100 group-hover:text-gray-200 transition-all duration-500">
-                        {item.cardDetailedText}
-                    </p>
+                <div className={
+                    "relative pt-6 border-t border-white/5  leading-relaxed text-sm  md:text-base font-sans opacity-80 text-gray-400 " +
+                    "group-hover:opacity-100 group-hover:text-gray-200 transition-all duration-500"
+                }>
+                    <p className="pb-1">{item.mainText}</p>
+
+                    <ul className="ml-7">
+                        {item.desc.map((item, index) => (
+                            <li
+                                key={index}
+                                className={`relative 
+                                    before:content-[''] before:absolute before:-left-5 before:top-1/2 before:-translate-y-1
+                                    before:w-3 before:h-3 before:bg-white 
+                                    before:[clip-path:polygon(0_0,100%_50%,0_100%)]
+                                    group-hover:before:bg-orange-500
+                            `}>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
                 </div>
+
+
             </div>
         </div>
     )
