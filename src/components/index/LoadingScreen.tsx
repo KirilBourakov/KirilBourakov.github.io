@@ -1,5 +1,5 @@
 import { useProgress } from "@react-three/drei";
-import {useState} from "react";
+import React, {useState} from "react";
 
 export default function LoadingScreen() {
     const { active, progress } = useProgress();
@@ -27,7 +27,7 @@ export default function LoadingScreen() {
                     <div className="absolute inset-0 border-2 border-orange-500/10 rounded-full"></div>
                     <div
                         className="absolute inset-0 border-2 border-orange-500 rounded-full transition-all duration-300 -rotate-90"
-                        style={{ '--progress': `${progress}%` }}
+                        style={{ '--progress': `${progress}%` } as React.CSSProperties}
                     >
                         <div className="size-full [clip-path:polygon(50%_50%,-50%_-50%,var(--progress)_-50%,var(--progress)_150%,-50%_150%)]" />
                     </div>
