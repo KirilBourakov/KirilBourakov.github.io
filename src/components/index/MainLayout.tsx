@@ -35,20 +35,20 @@ class SceneLayout {
 
     get sunPos(): [number, number, number] {
         if (this.tier === 'small') return [0.5, this.height / 2 - 2.3, 0];
-        if (this.tier === 'medium') return [-2.5, this.height / 2 - 2.3, 1];
+        if (this.tier === 'medium') return [-2, this.height / 2 - 1.7, 1];
         return [-this.width / 2 + 3, this.height / 2 - 1.5, 0];
     }
 
     get shipPos(): [number, number, number] {
         if (this.tier === 'small') return [-0.5, -3, 5];
-        if (this.tier === 'medium') return [-0.2, -3, 5];
-        return [-this.width / 2 + 7, -this.height / 2 + 1.5, 5];
+        if (this.tier === 'medium') return [0, -3, 5];
+        return [-.2, -this.height / 2 + 1.5, 5];
     }
 
     get stationPos(): [number, number, number] {
         if (this.tier === 'small') return [1.5, this.height / 2 - 4, -2];
-        if (this.tier === 'medium') return [-3, this.height / 2 - 5, 0];
-        return [this.width / 2 - 14, this.height / 2 - 5, -2];
+        if (this.tier === 'medium') return [-3, this.height / 2 - 4, 0];
+        return [-6, this.height / 2 - 5, -2];
     }
 
     get planetPos(): [number, number, number] {
