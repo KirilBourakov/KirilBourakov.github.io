@@ -8,9 +8,15 @@ interface Time{
     info: string;
 }
 
+interface TechItem {
+    name: string;
+    subtech?: string[];
+}
+
 interface Items{
     title: string;
     times: Time[];
+    tech?: (TechItem | string)[];
     cardSubtitle: string;
     mainText: string;
     desc: string[];
@@ -36,7 +42,7 @@ export default function Experience({ unzoom }: { unzoom: () => void }) {
             <div className="flex flex-col px-6 py-12 md:pl-16 md:pr-34 gap-10 pb-32 w-full">
                 <div className="relative border-l border-orange-500/30 ml-2 md:ml-4">
                     {data.map((item, index) => (
-                       <Card key={index} item={item} />
+                       <Card key={index} item={item as unknown as Items} />
                     ))}
                 </div>
             </div>
@@ -78,6 +84,15 @@ function Card({item} : { item: Items }) {
                     </div>
                 </div>
 
+                {/* TECH STACK */}
+                {item.tech && item.tech.length > 0 && (
+                    <div className="flex flex-wrap items-start gap-4 mb-8">
+                        {item.tech.map((t, i) => (
+                            <TechBadge key={i} tech={t} />
+                        ))}
+                    </div>
+                )}
+
                 <div className={
                     "relative pt-6 border-t border-white/5  leading-relaxed text-sm  md:text-base font-sans opacity-80 text-gray-400 " +
                     "group-hover:opacity-100 group-hover:text-gray-200 transition-all duration-500"
@@ -93,6 +108,7 @@ function Card({item} : { item: Items }) {
                                     before:w-3 before:h-3 before:bg-white 
                                     before:[clip-path:polygon(0_0,100%_50%,0_100%)]
                                     group-hover:before:bg-orange-500
+                                    mb-1 last:mb-0
                             `}>
                                 {item}
                             </li>
@@ -104,6 +120,29 @@ function Card({item} : { item: Items }) {
             </div>
         </div>
     )
+}
+
+function TechBadge({ tech }: { tech: TechItem | string }) {
+    const isObject = typeof tech !== 'string';
+    const name = isObject ? tech.name : tech;
+    const subtech = isObject ? tech.subtech : null;
+
+    return (
+        <div className="flex flex-col gap-1.5">
+            <div className="px-2 py-0.5 bg-orange-500/5 border border-orange-500/20 text-sm md:text-xs font-mono font-bold text-orange-500/60 uppercase tracking-widest group-hover:border-orange-500/40 group-hover:text-orange-400 transition-all">
+                {name}
+            </div>
+            {subtech && (
+                <div className="flex flex-wrap gap-x-2 gap-y-1 px-1">
+                    {subtech.map((st, i) => (
+                        <span key={i} className="text-sm text-white/40 group-hover:text-white/60 font-mono lowercase tracking-tighter transition-colors">
+                            {st}
+                        </span>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
 }
 
 function TimeEntry({time} : { time: Time}){

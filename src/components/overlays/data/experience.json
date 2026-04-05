@@ -13,6 +13,21 @@
         "info": "part-time"
       }
     ],
+    "tech": [
+      {
+        "name": "Python",
+        "subtech": ["NumPy", "Pandas", "Sklearn", "SciPy", "PyTorch"]
+      },
+      {
+        "name": "Java",
+        "subtech": ["Spring Boot"]
+      },
+      {
+        "name": "AWS",
+        "subtech": ["ECS", "Lambda"]
+      },
+      "Docker"
+    ],
     "cardSubtitle": "SmartSkin",
     "mainText": "Developed robust AI/ML models for time series data.",
     "desc": [
