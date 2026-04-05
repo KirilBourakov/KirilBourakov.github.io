@@ -1,37 +1,6 @@
 import {useEffect, useState} from "react";
 import BackDrop from "./BackDrop.tsx";
-
-const items = [
-    {
-        title: "Card title 1",
-        times: [
-            {
-                start: "2025-04",
-                end: "2025-05",
-                info: "full-time"
-            },
-            {
-                start: "2025-05",
-                end: "2025-06",
-                info: "part-time"
-            }
-        ],
-        cardSubtitle: "Tech Corp Inc.",
-        cardDetailedText: "Leading the migration to React 19 and optimizing performance.",
-    },
-    {
-        title: "Card title 2",
-        times: [
-            {
-                start: "2025-04",
-                end: "2025-05",
-                info: "full-time"
-            }
-        ],
-        cardSubtitle: "Tech Corp Inc 2.",
-        cardDetailedText: "Leading the migration to React 19 and optimizing performance.",
-    },
-];
+import data from './data/experience.json'
 
 interface Time{
     start: string;
@@ -65,7 +34,7 @@ export default function Experience({ unzoom }: { unzoom: () => void }) {
         <BackDrop visible={visible} zoomOut={zoomOut} title={"Experience"} flip={true}>
             <div className="flex flex-col px-6 py-12 md:pl-16 md:pr-34 gap-10 pb-32 w-full">
                 <div className="relative border-l border-orange-500/30 ml-2 md:ml-4">
-                    {items.map((item, index) => (
+                    {data.map((item, index) => (
                        <Card key={index} item={item} />
                     ))}
                 </div>

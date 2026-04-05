@@ -1,0 +1,31 @@
+[
+  {
+    "title": "Card title 1",
+    "times": [
+      {
+        "start": "2025-04",
+        "end": "2025-05",
+        "info": "full-time"
+      },
+      {
+        "start": "2025-05",
+        "end": "2025-06",
+        "info": "part-time"
+      }
+    ],
+    "cardSubtitle": "Tech Corp Inc.",
+    "cardDetailedText": "Leading the migration to React 19 and optimizing performance."
+  },
+  {
+    "title": "Card title 2",
+    "times": [
+      {
+        "start": "2025-04",
+        "end": "2025-05",
+        "info": "full-time"
+      }
+    ],
+    "cardSubtitle": "Tech Corp Inc 2.",
+    "cardDetailedText": "Leading the migration to React 19 and optimizing performance."
+  }
+]

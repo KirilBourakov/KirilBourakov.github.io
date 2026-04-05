@@ -1,8 +1,8 @@
 import {useEffect, useState} from 'react';
 import ProjectsItem from '../overlays/ProjectsItem.tsx';
-import data from './projects.json'
 import {FaArrowDown, FaArrowUp} from "react-icons/fa";
 import BackDrop from "./BackDrop.tsx";
+import data from './data/projects.json'
 
 export default function Projects({ unzoom } : {unzoom: () => void}) {
     const ALL = 'all'
