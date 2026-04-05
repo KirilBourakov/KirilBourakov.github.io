@@ -6,7 +6,7 @@ import {Mesh, Vector3} from "three";
 import {LabelGroup} from "../LabelGroup.tsx";
 import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
 
-export default function ShipGroup({ cameraRef, isMobile, shipGroupRef }: {cameraRef: RefObject<CameraControls>, isMobile : boolean, shipGroupRef: RefObject<Mesh> }) {
+export default function ShipGroup({ cameraRef, isMobile, shipGroupRef, lowEnd }: {cameraRef: RefObject<CameraControls>, isMobile : boolean, shipGroupRef: RefObject<Mesh>, lowEnd?: boolean }) {
     const [hover, setHover] = useState(false);
 
     const linePoints = isMobile ? [
@@ -60,7 +60,7 @@ export default function ShipGroup({ cameraRef, isMobile, shipGroupRef }: {camera
                     ref={meshRef}
                 />
 
-                {isNotZoomed &&
+                {isNotZoomed && !lowEnd &&
                     <HoverRing
                         hover={hover}
                         innerRadius={1.4}

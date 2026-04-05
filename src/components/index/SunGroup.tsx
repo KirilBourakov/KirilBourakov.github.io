@@ -7,7 +7,7 @@ import {HoverRing} from "../HoverRing.tsx";
 import {LabelGroup} from "../LabelGroup.tsx";
 import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
 
-export default function SunGroup({ cameraRef, isMobile, sunGroupRef } : { cameraRef: RefObject<CameraControls>, isMobile : boolean, sunGroupRef: RefObject<Mesh> }) {
+export default function SunGroup({ cameraRef, isMobile, sunGroupRef, lowEnd } : { cameraRef: RefObject<CameraControls>, isMobile : boolean, sunGroupRef: RefObject<Mesh>, lowEnd?: boolean }) {
     const { zoomFocus, setZoomFocus } = useZoom();
     const isNotZoomed = zoomFocus === ZoomType.NONE
 
@@ -54,7 +54,7 @@ export default function SunGroup({ cameraRef, isMobile, sunGroupRef } : { camera
                         onClick={() => handleClick()}
                     />
 
-                    {isNotZoomed &&
+                    {isNotZoomed && !lowEnd &&
                         <HoverRing
                             hover={hover}
                             innerRadius={0.7}

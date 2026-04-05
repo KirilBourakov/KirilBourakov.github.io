@@ -3,12 +3,14 @@ import {Bloom, EffectComposer} from "@react-three/postprocessing";
 import MainLayout from "./components/index/MainLayout.tsx";
 import {ZoomContextProvider} from "./hooks/ZoomContext.tsx";
 import OverlayManager from "./components/overlays/OverlayManager.tsx";
-import {Suspense, useRef} from "react";
-import {CameraControls, Environment} from "@react-three/drei";
+import {Suspense, useRef, useState} from "react";
+import {BakeShadows, CameraControls, Environment, PerformanceMonitor} from "@react-three/drei";
 import LoadingScreen from "./components/index/LoadingScreen.tsx";
 
 export default function App() {
     const cameraRef = useRef<CameraControls>(null!)
+    const [dpr, setDpr] = useState(1)
+    const [lowEndMode, setLowEndMode] = useState(false)
 
     return (
         <ZoomContextProvider>
@@ -16,15 +18,26 @@ export default function App() {
                 <LoadingScreen />
                 
                 <div className="absolute right-0 top-0 w-full h-full">
-                    <Canvas dpr={[1, 1]}>
+                    <Canvas dpr={[dpr, dpr]}>
+                        <PerformanceMonitor
+                            onDecline={() => {
+                                setDpr(.5)
+                                setLowEndMode(true)
+                            }}
+                        />
+
                         <Environment
                             files="/bg.jpg"
                             background
                         />
 
-                        <EffectComposer autoClear={false} multisampling={0}>
-                            <Bloom luminanceThreshold={1} intensity={2} selectable />
-                        </EffectComposer>
+                        <BakeShadows />
+
+                        {!lowEndMode &&
+                            <EffectComposer autoClear={false} multisampling={0}>
+                                <Bloom luminanceThreshold={1} intensity={2} selectable />
+                            </EffectComposer>
+                        }
 
                         <CameraControls
                             ref={cameraRef}
@@ -43,7 +56,7 @@ export default function App() {
                         />
 
                         <Suspense fallback={null}>
-                            <MainLayout cameraRef={cameraRef}/>
+                            <MainLayout cameraRef={cameraRef} lowEnd={lowEndMode}/>
                         </Suspense>
 
                         <ambientLight intensity={2} />

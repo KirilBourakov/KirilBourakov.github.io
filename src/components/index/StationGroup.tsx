@@ -6,7 +6,7 @@ import {HoverRing} from "../HoverRing.tsx";
 import {LabelGroup} from "../LabelGroup.tsx";
 import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
 
-export default function StationGroup({ cameraRef, isMobile, stationGroupRef } : { cameraRef: RefObject<CameraControls>, isMobile : boolean, stationGroupRef: RefObject<Mesh> }) {
+export default function StationGroup({ cameraRef, isMobile, stationGroupRef, lowEnd } : { cameraRef: RefObject<CameraControls>, isMobile : boolean, stationGroupRef: RefObject<Mesh>, lowEnd?: boolean }) {
     const { zoomFocus, setZoomFocus } = useZoom();
     const isNotZoomed = zoomFocus === ZoomType.NONE
 
@@ -60,7 +60,7 @@ export default function StationGroup({ cameraRef, isMobile, stationGroupRef } : 
                     onClick={() => handleClick()}
                 />
 
-                {isNotZoomed &&
+                {isNotZoomed && !lowEnd &&
                     <HoverRing
                         hover={hover}
                         innerRadius={1.6}

@@ -58,7 +58,7 @@ class SceneLayout {
     }
 }
 
-export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraControls>}) {
+export default function MainLayout({cameraRef, lowEnd} : {cameraRef: RefObject<CameraControls>, lowEnd: boolean}) {
     const { size, viewport } = useThree();
 
     const layout = useMemo(() =>
@@ -72,19 +72,19 @@ export default function MainLayout({cameraRef} : {cameraRef: RefObject<CameraCon
     return (
         <group>
             <group position={layout.sunPos} ref={sunGroupRef}>
-                <SunGroup cameraRef={cameraRef} isMobile={layout.isMobile} sunGroupRef={sunGroupRef} />
+                <SunGroup cameraRef={cameraRef} isMobile={layout.isMobile} sunGroupRef={sunGroupRef} lowEnd={lowEnd} />
             </group>
 
             <group position={layout.shipPos} ref={shipGroupRef}>
-                <ShipGroup cameraRef={cameraRef} isMobile={layout.isMobile} shipGroupRef={shipGroupRef} />
+                <ShipGroup cameraRef={cameraRef} isMobile={layout.isMobile} shipGroupRef={shipGroupRef} lowEnd={lowEnd} />
             </group>
 
             <group position={layout.stationPos} ref={stationGroupRef}>
-                <StationGroup cameraRef={cameraRef} isMobile={layout.isMobile} stationGroupRef={stationGroupRef} />
+                <StationGroup cameraRef={cameraRef} isMobile={layout.isMobile} stationGroupRef={stationGroupRef} lowEnd={lowEnd} />
             </group>
 
             <group position={layout.planetPos}>
-                <DestroyedPlanetGroup />
+                <DestroyedPlanetGroup lowEnd={lowEnd} />
             </group>
         </group>
     )

@@ -15,7 +15,7 @@ import { useGLTF } from '@react-three/drei'
 import {Mesh} from "three";
 import {useFrame} from "@react-three/fiber";
 
-export function DestroyedPlanet(props) {
+export function DestroyedPlanet({lowEnd, ...props} : {lowEnd?: boolean}) {
   const { nodes, materials } = useGLTF('/models/destroyedPlanet-transformed.glb')
     const meshRef = useRef<Mesh>(null!)
 
@@ -31,7 +31,7 @@ export function DestroyedPlanet(props) {
           geometry={nodes.COMBINE_LP_LAM_0.geometry}
           material={materials.material}
           material-emissive="#ff4d01"
-          material-emissiveIntensity={4}
+          material-emissiveIntensity={lowEnd ? 0.5 : 4}
           material-toneMapped={false}
       />
       <mesh geometry={nodes.COMBINE_LP_1_0.geometry} material={materials.material_1}   />
