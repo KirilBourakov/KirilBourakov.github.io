@@ -38,8 +38,22 @@
       "Wrote AWS lambda functions to run and manage models, and terraform to deploy them.",
       "Helped develop robust model versioning using S3.",
       "Wrote a genetic algorithm that improved prototype model accuracy by more then 20%.",
-      "Wrote algorithm to detect and fix inaccurate RPM readings from Container Twin sensor."
+      "Wrote algorithm to detect and fix inaccurate RPM readings from Container Twin sensor.",
+      "Wrote robust C code to replace java code in performance critical sections."
     ]
+  },
+  {
+    "title": "CS Square Student Assistant",
+    "times": [
+      {
+        "start": "January 2025",
+        "end": "April 2025",
+        "info": "part-time"
+      }
+    ],
+    "cardSubtitle": "University Of New Brunswick",
+    "mainText": "Helping organize and promote the CS square at UNB.",
+    "desc": []
   },
   {
     "title": "Seafood Clerk",
