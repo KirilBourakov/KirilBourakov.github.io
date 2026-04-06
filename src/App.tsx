@@ -1,18 +1,12 @@
-import {Canvas} from '@react-three/fiber'
-import {Bloom, EffectComposer} from "@react-three/postprocessing";
 import {ZoomContextProvider} from "./hooks/ZoomContext.tsx";
-import OverlayManager from "./components/overlays/OverlayManager.tsx";
-import {Suspense, useEffect, useRef, useState} from "react";
-import {BakeShadows, CameraControls, Environment, PerformanceMonitor} from "@react-three/drei";
+import {useEffect, useState} from "react";
 import {getGPUTier, type TierResult} from 'detect-gpu';
-import ModelLoadingScreen, {LoadingScreen} from "./components/ModelLoadingScreen.tsx";
-import MainLayout from "./components/view3d/MainLayout.tsx";
+import {LoadingScreen} from "./components/ModelLoadingScreen.tsx";
+import Main2D from "./components/view2d/Main2D.tsx";
+import {Main3D} from "./components/view3d/Main3D.tsx";
 
 
 export default function App() {
-    const cameraRef = useRef<CameraControls>(null!)
-    const [dpr, setDpr] = useState(1)
-    const [lowEndMode, setLowEndMode] = useState(false)
     const [gpuData, setGpuData] = useState<TierResult | null>(null);
 
     useEffect(() => {
@@ -25,69 +19,13 @@ export default function App() {
 
     if (!gpuData) return <LoadingScreen active={true} progress={0} />
 
-    if (gpuData.tier < 2 || gpuData.isMobile) {
-        return <div>This device is not supported</div>
-    }
-
     return (
         <ZoomContextProvider>
-            <div className="w-screen h-screen m-0 relative overflow-hidden bg-black">
-                <ModelLoadingScreen />
-                
-                <div className="absolute right-0 top-0 w-full h-full">
-                    <Canvas dpr={[dpr, dpr]}>
-                        <PerformanceMonitor
-                            onDecline={() => {
-                                if (document.visibilityState === 'visible') {
-                                    setDpr(.5)
-                                    setLowEndMode(true)
-                                }
-                            }}
-                            onIncline={() => {
-                                setDpr(1)
-                                setLowEndMode(false)
-                            }}
-                        />
-
-                        <Environment
-                            files="/bg.jpg"
-                            background
-                        />
-
-                        <BakeShadows />
-
-                        {!lowEndMode &&
-                            <EffectComposer autoClear={false} multisampling={0}>
-                                <Bloom luminanceThreshold={1} intensity={2} selectable />
-                            </EffectComposer>
-                        }
-
-                        <CameraControls
-                            ref={cameraRef}
-                            makeDefault
-                            mouseButtons={{
-                                left: 0,
-                                middle: 0,
-                                right: 0,
-                                wheel: 0
-                            }}
-                            touches={{
-                                one: 0,
-                                two: 0,
-                                three: 0,
-                            }}
-                        />
-
-                        <Suspense fallback={null}>
-                            <MainLayout cameraRef={cameraRef} lowEnd={lowEndMode}/>
-                        </Suspense>
-
-                        <ambientLight intensity={2} />
-                    </Canvas>
-                </div>
-
-                <OverlayManager cameraRef={cameraRef} />
-            </div>
+            {gpuData.tier < 2 || gpuData.isMobile ?
+                <Main2D />
+            :
+                <Main3D />
+            }
         </ZoomContextProvider>
     )
 }
