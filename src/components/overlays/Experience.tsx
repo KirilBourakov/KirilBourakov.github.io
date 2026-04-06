@@ -147,14 +147,14 @@ function TechBadge({ tech }: { tech: TechItem | string }) {
 
 function TimeEntry({time} : { time: Time}){
     return (
-        <div className="flex items-center gap-3 text-xs md:text-sm font-mono whitespace-nowrap">
+        <div className="flex flex-col xl:flex-row items-start md:items-end gap-1 xl:gap-3 text-xs md:text-sm font-mono">
             <div className="flex items-center gap-2 group-hover:text-orange-400 transition-colors duration-500 text-white/60">
                 <span className="font-bold">{time.start}</span>
                 <span className="opacity-30">—</span>
                 <span className="font-bold">{time.end}</span>
             </div>
             <span className={
-                "text-sm bg-white/5 border border-white/10 px-2 py-0.5 uppercase tracking-widest text-white/40 " +
+                "text-sm md:text-xs bg-white/5 border border-white/10 px-2 py-0.5 uppercase tracking-widest text-white/40 " +
                 "group-hover:border-orange-500/30 group-hover:text-orange-300 transition-all duration-500"
             }>
                 {time.info}
