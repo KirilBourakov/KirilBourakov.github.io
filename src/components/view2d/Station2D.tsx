@@ -23,7 +23,7 @@ export default function Station2D() {
         >
             <div
                 id="station-zoom-target"
-                className="absolute -left-20 top-1/2 -translate-y-1/2 w-1 h-1 bg-transparent"
+                className="absolute left-0 md:-left-[8vw] top-1/2 -translate-y-1/2 w-1 h-1 bg-transparent"
             />
 
             <div 
