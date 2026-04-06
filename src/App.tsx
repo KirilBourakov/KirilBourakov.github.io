@@ -1,12 +1,12 @@
 import {Canvas} from '@react-three/fiber'
 import {Bloom, EffectComposer} from "@react-three/postprocessing";
-import MainLayout from "./components/index/MainLayout.tsx";
 import {ZoomContextProvider} from "./hooks/ZoomContext.tsx";
 import OverlayManager from "./components/overlays/OverlayManager.tsx";
 import {Suspense, useEffect, useRef, useState} from "react";
 import {BakeShadows, CameraControls, Environment, PerformanceMonitor} from "@react-three/drei";
-import ModelLoadingScreen, {LoadingScreen} from "./components/index/ModelLoadingScreen.tsx";
 import {getGPUTier, type TierResult} from 'detect-gpu';
+import ModelLoadingScreen, {LoadingScreen} from "./components/ModelLoadingScreen.tsx";
+import MainLayout from "./components/view3d/MainLayout.tsx";
 
 
 export default function App() {

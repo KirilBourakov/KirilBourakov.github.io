@@ -1,10 +1,10 @@
-import Ship from "../models/Ship.tsx";
 import {HoverRing} from "../HoverRing.tsx";
 import {type RefObject, useRef, useState} from "react";
 import {type CameraControls, useCursor} from "@react-three/drei";
 import {Mesh, Vector3} from "three";
 import {LabelGroup} from "../LabelGroup.tsx";
-import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
+import Ship from "../models/Ship.tsx";
+import {useZoom, ZoomType} from "../../../hooks/ZoomContext.tsx";
 
 export default function ShipGroup({ cameraRef, isMobile, shipGroupRef, lowEnd }: {cameraRef: RefObject<CameraControls>, isMobile : boolean, shipGroupRef: RefObject<Mesh>, lowEnd?: boolean }) {
     const [hover, setHover] = useState(false);

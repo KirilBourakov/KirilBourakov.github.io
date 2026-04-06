@@ -1,11 +1,11 @@
 import {useThree} from "@react-three/fiber";
-import DestroyedPlanetGroup from "./DestroyedPlanetGroup.tsx";
-import SunGroup from "./SunGroup.tsx";
-import ShipGroup from "./ShipGroup.tsx";
 import {CameraControls} from "@react-three/drei";
 import {type RefObject, useMemo, useRef} from "react";
 import type {Mesh} from "three";
-import StationGroup from "./StationGroup.tsx";
+import ShipGroup from "./group/ShipGroup.tsx";
+import SunGroup from "./group/SunGroup.tsx";
+import StationGroup from "./group/StationGroup.tsx";
+import DestroyedPlanetGroup from "./group/DestroyedPlanetGroup.tsx";
 
 const BREAKPOINTS = {
     md: 768,

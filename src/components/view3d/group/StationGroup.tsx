@@ -1,10 +1,10 @@
 import {type Mesh, Vector3} from "three";
 import {type RefObject, useRef, useState} from "react";
-import {Station} from "../models/Station.tsx";
 import {type CameraControls, useCursor} from "@react-three/drei";
-import {HoverRing} from "../HoverRing.tsx";
 import {LabelGroup} from "../LabelGroup.tsx";
-import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
+import {HoverRing} from "../HoverRing.tsx";
+import {useZoom, ZoomType} from "../../../hooks/ZoomContext.tsx";
+import {Station} from "../models/Station.tsx";
 
 export default function StationGroup({ cameraRef, isMobile, stationGroupRef, lowEnd } : { cameraRef: RefObject<CameraControls>, isMobile : boolean, stationGroupRef: RefObject<Mesh>, lowEnd?: boolean }) {
     const { zoomFocus, setZoomFocus } = useZoom();

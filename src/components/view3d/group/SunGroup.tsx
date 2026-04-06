@@ -5,7 +5,7 @@ import Sun from "../models/Sun.tsx";
 import {type CameraControls, useCursor} from "@react-three/drei";
 import {HoverRing} from "../HoverRing.tsx";
 import {LabelGroup} from "../LabelGroup.tsx";
-import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
+import {useZoom, ZoomType} from "../../../hooks/ZoomContext.tsx";
 
 export default function SunGroup({ cameraRef, isMobile, sunGroupRef, lowEnd } : { cameraRef: RefObject<CameraControls>, isMobile : boolean, sunGroupRef: RefObject<Mesh>, lowEnd?: boolean }) {
     const { zoomFocus, setZoomFocus } = useZoom();
