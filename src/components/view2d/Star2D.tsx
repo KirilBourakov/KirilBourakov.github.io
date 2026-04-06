@@ -18,7 +18,7 @@ export default function Star2D() {
     };
 
     return (
-        <div className="absolute top-3/12 left-4/10 w-36 md:left-[15%] md:top-2/12 md:w-48 lg:w-64 h-auto z-10">
+        <div className="absolute top-4/12 left-4/10 w-36 md:left-[15%] md:top-2/12 md:w-48 lg:w-64 h-auto z-10">
             <div
                 id="star-zoom-target"
                 className="absolute left-[22vw] top-1/2 -translate-y-1/2 w-1 h-1 bg-transparent"
