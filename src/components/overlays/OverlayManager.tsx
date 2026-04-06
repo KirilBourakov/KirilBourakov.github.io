@@ -15,6 +15,8 @@ export default function OverlayManager({cameraRef}: {cameraRef: RefObject<Camera
             cameraRef.current.reset(true).then(
                 () => setZoomFocus(ZoomType.NONE)
             )
+        } else {
+            setZoomFocus(ZoomType.NONE)
         }
     }
 
