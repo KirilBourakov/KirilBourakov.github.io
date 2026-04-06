@@ -47,6 +47,20 @@ export default function Main2D(){
                 </TransformWrapper>
             </div>
 
+            <div
+                className="fixed bottom-4 right-0 z-50 bg-black/80 backdrop-blur-xl text-white/90 pl-10 pr-6 py-3 font-mono text-sm md:text-xs uppercase
+                tracking-widest pointer-events-none border-l border-orange-500/30 [clip-path:polygon(32px_0%,_100%_0%,_100%_100%,_0%_100%)]"
+            >
+                <div className="absolute left-0 top-0 w-1 h-full bg-orange-500"></div>
+                <div className="flex flex-col gap-1 items-end relative">
+                    <span className="text-orange-500 font-bold flex items-center gap-2">
+                        <span className="w-2 h-2 bg-orange-500 animate-pulse rounded-full"></span>
+                        System Status: 2D Fallback Active
+                    </span>
+                    <span className="opacity-70">Hardware incompatible — upgrade device for 3D interface</span>
+                </div>
+            </div>
+
             <OverlayManager cameraRef={null}/>
         </>
 
