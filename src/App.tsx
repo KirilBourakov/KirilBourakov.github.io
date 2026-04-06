@@ -38,8 +38,14 @@ export default function App() {
                     <Canvas dpr={[dpr, dpr]}>
                         <PerformanceMonitor
                             onDecline={() => {
-                                setDpr(.5)
-                                setLowEndMode(true)
+                                if (document.visibilityState === 'visible') {
+                                    setDpr(.5)
+                                    setLowEndMode(true)
+                                }
+                            }}
+                            onIncline={() => {
+                                setDpr(1)
+                                setLowEndMode(false)
                             }}
                         />
 
