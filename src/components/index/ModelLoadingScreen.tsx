@@ -1,8 +1,7 @@
 import { useProgress } from "@react-three/drei";
 import React, {useState} from "react";
 
-export default function LoadingScreen() {
-    const { active, progress } = useProgress();
+export function LoadingScreen({active, progress} : {active: boolean, progress: number}) {
     const [isGone, setIsGone] = useState(false);
 
     const handleTransitionEnd = () => {
@@ -44,7 +43,7 @@ export default function LoadingScreen() {
                     </div>
 
                     <div className="relative h-0.5 w-full bg-white/5 overflow-hidden">
-                        <div 
+                        <div
                             className="absolute inset-y-0 left-0 bg-orange-500 transition-all duration-300 ease-out"
                             style={{ width: `${progress}%` }}
                         />
@@ -71,4 +70,9 @@ export default function LoadingScreen() {
             <div className="absolute bottom-12 right-12 w-32 h-32 border-r border-b border-white/5"></div>
         </div>
     );
+}
+
+export default function ModelLoadingScreen() {
+    const { active, progress } = useProgress();
+    return <LoadingScreen progress={progress} active={active} />;
 }

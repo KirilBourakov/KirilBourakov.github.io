@@ -3,19 +3,36 @@ import {Bloom, EffectComposer} from "@react-three/postprocessing";
 import MainLayout from "./components/index/MainLayout.tsx";
 import {ZoomContextProvider} from "./hooks/ZoomContext.tsx";
 import OverlayManager from "./components/overlays/OverlayManager.tsx";
-import {Suspense, useRef, useState} from "react";
+import {Suspense, useEffect, useRef, useState} from "react";
 import {BakeShadows, CameraControls, Environment, PerformanceMonitor} from "@react-three/drei";
-import LoadingScreen from "./components/index/LoadingScreen.tsx";
+import ModelLoadingScreen, {LoadingScreen} from "./components/index/ModelLoadingScreen.tsx";
+import {getGPUTier, type TierResult} from 'detect-gpu';
+
 
 export default function App() {
     const cameraRef = useRef<CameraControls>(null!)
     const [dpr, setDpr] = useState(1)
     const [lowEndMode, setLowEndMode] = useState(false)
+    const [gpuData, setGpuData] = useState<TierResult | null>(null);
+
+    useEffect(() => {
+        (async () => {
+            const gpuTier = await getGPUTier();
+            setGpuData(gpuTier);
+        })();
+    }, []);
+
+
+    if (!gpuData) return <LoadingScreen active={true} progress={0} />
+
+    if (gpuData.tier < 2 || gpuData.isMobile) {
+        return <div>This device is not supported</div>
+    }
 
     return (
         <ZoomContextProvider>
             <div className="w-screen h-screen m-0 relative overflow-hidden bg-black">
-                <LoadingScreen />
+                <ModelLoadingScreen />
                 
                 <div className="absolute right-0 top-0 w-full h-full">
                     <Canvas dpr={[dpr, dpr]}>
