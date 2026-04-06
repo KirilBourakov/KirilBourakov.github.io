@@ -21,11 +21,12 @@ export default function App() {
 
     return (
         <ZoomContextProvider>
-            {gpuData.tier < 2 || gpuData.isMobile ?
-                <Main2D />
-            :
-                <Main3D />
-            }
+            <Main2D />
+            {/*{gpuData.tier < 2 || gpuData.isMobile ?*/}
+            {/*    <Main2D />*/}
+            {/*:*/}
+            {/*    <Main3D />*/}
+            {/*}*/}
         </ZoomContextProvider>
     )
 }

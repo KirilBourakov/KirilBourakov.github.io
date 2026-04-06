@@ -7,13 +7,15 @@ import Resume from "./Resume.tsx";
 import Experience from "./Experience.tsx";
 
 
-export default function OverlayManager({cameraRef}: {cameraRef: RefObject<CameraControls>}) {
+export default function OverlayManager({cameraRef}: {cameraRef: RefObject<CameraControls> | null}) {
     const { zoomFocus, setZoomFocus } = useZoom();
 
     function unzoom(){
-        cameraRef.current.reset(true).then(
-            () => setZoomFocus(ZoomType.NONE)
-        )
+        if (cameraRef){
+            cameraRef.current.reset(true).then(
+                () => setZoomFocus(ZoomType.NONE)
+            )
+        }
     }
 
     if (zoomFocus == ZoomType.PROJECTS){
