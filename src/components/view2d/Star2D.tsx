@@ -1,15 +1,18 @@
 import {useRef, useState} from "react";
 import {useZoom, ZoomType} from "../../hooks/ZoomContext.tsx";
 import Label2D from "./Label2D.tsx";
+import {useControls} from "react-zoom-pan-pinch";
 
 export default function Star2D() {
     const { zoomFocus, setZoomFocus } = useZoom();
     const isNotZoomed = zoomFocus === ZoomType.NONE;
     const [hover, setHover] = useState(false);
     const imgContainerRef = useRef<HTMLDivElement>(null);
+    const { zoomToElement } = useControls();
 
     const handleClick = () => {
         if (isNotZoomed) {
+            zoomToElement("star-container", 2.5, 600, "easeOut");
             setZoomFocus(ZoomType.RESUME);
         }
     };
@@ -20,6 +23,7 @@ export default function Star2D() {
         >
             <div 
                 ref={imgContainerRef}
+                id="star-container"
                 className={`relative transition-all duration-300 cursor-pointer ${hover && isNotZoomed ? 'scale-110' : ''}`}
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
