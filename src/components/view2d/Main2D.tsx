@@ -5,30 +5,26 @@ export default function Main2D(){
         <>
             <div className="fixed inset-0 -z-10 overflow-hidden bg-black">
                 <div
-                    className="absolute inset-0 bg-[url('/bg2d.png')] bg-cover bg-center
-                   portrait:w-[100vh] portrait:h-[100vw]
-                   portrait:top-1/2 portrait:left-1/2
-                   portrait:-translate-x-1/2 portrait:-translate-y-1/2
-                   portrait:rotate-90"
+                    className="absolute inset-0 bg-[url('/bg2d.png')] bg-cover bg-[55%_center] md:bg-center"
                 ></div>
-
-
-                <img
-                    src="/ship.png"
-                    alt="ship"
-                    className="absolute left-1/3 bottom-1/3 h-auto z-10 w-96"
-                />
 
                 <img
                     src="/star.png"
-                    alt="star"
-                    className="absolute top-1/12 h-auto z-10 w-96"
+                    alt="Star"
+                    className="absolute top-3/12 left-4/10 w-36 md:left-[15%] md:top-2/12  md:w-48 lg:w-64 h-auto z-10"
                 />
 
                 <img
+                    src="/ship.png"
+                    alt="Spaceship"
+                    className="absolute top-7/12 left-3/10 w-48 md:left-1/3 md:bottom-1/3 md:w-72 lg:w-96 h-auto z-10"
+                />
+
+
+                <img
                     src="/station.png"
-                    alt="star"
-                    className="absolute left-1/12 bottom-2/12 h-auto z-10 w-96"
+                    alt="Space station"
+                    className="absolute top-5/12 left-0 w-56 md:left-[8%] md:top-8/12 md:w-80 lg:w-96 h-auto z-10"
                 />
 
             </div>
