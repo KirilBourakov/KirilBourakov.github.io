@@ -12,39 +12,40 @@ export default function Ship2D() {
 
     const handleClick = () => {
         if (isNotZoomed) {
-            zoomToElement("ship-container", 2.5, 600, "easeOut");
+            zoomToElement("ship-zoom-target", 2.5, 600, "easeOut");
             setZoomFocus(ZoomType.PROJECTS);
         }
     };
 
     return (
-        <div 
-            className="absolute top-7/12 left-3/10 w-48 md:left-1/3 md:bottom-1/3 md:top-auto md:w-72 lg:w-96 h-auto z-10"
-        >
+        <div className={"absolute top-7/12 left-1/3 z-10 w-fit md:left-1/3 md:bottom-1/3 md:top-auto pr-72 md:pr-92 lg:pr-116"} id="ship-zoom-target">
             <div
-                ref={imgContainerRef}
-                id="ship-container"
-                className={`relative transition-all duration-300 cursor-pointer ${hover && isNotZoomed ? 'scale-110' : ''}`}
-                onMouseEnter={() => setHover(true)}
-                onMouseLeave={() => setHover(false)}
-                onClick={handleClick}
+                className="relative w-48 md:w-72 lg:w-96 h-auto z-10"
             >
-                <img
-                    src="/ship.png"
-                    alt="Spaceship"
-                    className="w-full h-auto"
-                />
-                {isNotZoomed && (
-                    <Label2D
-                        hover={hover}
-                        setHover={setHover}
-                        handleClick={handleClick}
-                        text="[ PROJECTS ]"
-                        imgRef={imgContainerRef}
-                        align="left"
-                        className="top-1/2 left-[10%]"
-                    />
-                )}
+                    <div
+                        ref={imgContainerRef}
+                        className={`relative transition-all duration-300 cursor-pointer ${hover && isNotZoomed ? 'scale-110' : ''}`}
+                        onMouseEnter={() => setHover(true)}
+                        onMouseLeave={() => setHover(false)}
+                        onClick={handleClick}
+                    >
+                        <img
+                            src="/ship.png"
+                            alt="Spaceship"
+                            className="w-full h-auto"
+                        />
+                        {isNotZoomed && (
+                            <Label2D
+                                hover={hover}
+                                setHover={setHover}
+                                handleClick={handleClick}
+                                text="[ PROJECTS ]"
+                                imgRef={imgContainerRef}
+                                align="left"
+                                className="top-1/2 left-[10%]"
+                            />
+                        )}
+                </div>
             </div>
         </div>
     )

@@ -12,7 +12,7 @@ export default function Station2D() {
 
     const handleClick = () => {
         if (isNotZoomed) {
-            zoomToElement("station-container", 2, 600, "easeOut");
+            zoomToElement("station-zoom-target", 2, 600, "easeOut");
             setZoomFocus(ZoomType.EXPERIENCE);
         }
     };
@@ -21,6 +21,11 @@ export default function Station2D() {
         <div 
             className="absolute top-5/12 left-0 w-56 md:left-[8%] md:top-8/12 md:w-80 lg:w-96 h-auto z-10"
         >
+            <div
+                id="station-zoom-target"
+                className="absolute -left-20 top-1/2 -translate-y-1/2 w-1 h-1 bg-transparent"
+            />
+
             <div 
                 ref={imgContainerRef}
                 id="station-container"

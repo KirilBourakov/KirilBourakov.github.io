@@ -33,6 +33,7 @@ export default function Main2D(){
                     maxScale={5}
                     centerOnInit={true}
                     disabled={true}
+                    limitToBounds={false}
                 >
                     <ZoomHandler />
                     <TransformComponent
