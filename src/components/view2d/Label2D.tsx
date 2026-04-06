@@ -35,7 +35,7 @@ export default function Label2D({ hover, setHover, handleClick, text, imgRef, al
             >
                 {text}
             </div>
-            <SvgLine labelRef={labelRef} imageRef={imgRef} align={align} hover={hover} />
+            <SvgLine labelRef={labelRef} imageRef={imgRef} align={align} />
         </>
     );
 }
@@ -47,37 +47,39 @@ interface Coords{
     labelY: number;
 }
 
-function SvgLine({ imageRef, labelRef, align, hover} : { imageRef: RefObject<HTMLDivElement | null>, labelRef: RefObject<HTMLDivElement | null>, align: "left" | "right", hover: boolean }) {
+function SvgLine({ imageRef, labelRef, align} : { imageRef: RefObject<HTMLDivElement | null>, labelRef: RefObject<HTMLDivElement | null>, align: "left" | "right" }) {
     const [lineCoords, setLineCoords] = useState<Coords | null>(null);
 
     useEffect(() => {
-        function calculatePositions() {
+        let animationFrameId: number;
+
+        const calculatePositions = () => {
             if (!imageRef.current || !labelRef.current) return;
 
             const img = imageRef.current.getBoundingClientRect();
             const label = labelRef.current.getBoundingClientRect();
 
-            let imgX = 0;
-            let labelX = 0;
+            if (img.width === 0 || label.width === 0) return;
 
-            if (align === "left") {
-                imgX = img.left + (img.width / 2)
-                labelX = label.right;
-            } else {
-                imgX = img.right - (img.width / 2)
-                labelX = label.left;
-            }
-
+            const imgX = img.left + (img.width / 2);
             const imgY = img.top + (img.height / 2);
+            const labelX = align === "left" ? label.right : label.left;
             const labelY = label.top + (label.height / 2);
 
             setLineCoords({ imgX, imgY, labelX, labelY });
-        }
+        };
 
-        calculatePositions();
-        window.addEventListener('resize', calculatePositions);
-        return () => window.removeEventListener('resize', calculatePositions);
-    }, [imageRef, labelRef, align, hover]);
+        const update = () => {
+            calculatePositions();
+            animationFrameId = requestAnimationFrame(update);
+        };
+
+        update();
+
+        return () => {
+            cancelAnimationFrame(animationFrameId);
+        };
+    }, [imageRef, labelRef, align]);
 
     if (!lineCoords) return null;
 
@@ -86,7 +88,7 @@ function SvgLine({ imageRef, labelRef, align, hover} : { imageRef: RefObject<HTM
             <line
                 x1={lineCoords.imgX} y1={lineCoords.imgY}
                 x2={lineCoords.labelX} y2={lineCoords.labelY}
-                stroke="black" strokeWidth="2"
+                stroke="orange" strokeWidth="2"
             />
         </svg>,
         document.body
