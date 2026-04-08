@@ -47,7 +47,7 @@ export default function Station2D() {
                         text="[ EXPERIENCE ]"
                         imgRef={imgContainerRef}
                         align="right"
-                        className="top-3/4 left-[80%]"
+                        className="top-6/10 lg:top-3/4 left-[80%]"
                     />
                 )}
             </div>
